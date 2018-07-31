@@ -1,0 +1,6 @@
+.idea
+.directory
+docker/nginx/log/*
+docker/pgsql/db/*
+
+!.gitkeep
