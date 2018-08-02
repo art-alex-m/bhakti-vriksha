@@ -23,6 +23,8 @@ services:
 
   pgsql:
       image: postgres:9
+      ports:
+        - 15432:5432
       volumes:
         - ./docker/pgsql/db:/var/lib/postgresql
         - ./docker/pgsql/db_user_init.sql:/tmp/db_user_init.sql

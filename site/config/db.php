@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Конфигурация базы данных веб приложения
+ */
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'pgsql:host=postgresql;dbname=bhakti_vriksha',
