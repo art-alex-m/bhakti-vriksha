@@ -1,11 +1,14 @@
 <?php
+/**
+ * Конфигурация веб приложения
+ */
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$common = require __DIR__ . '/common.php';
 
 $config = [
     'name' => 'Bhakti Vriksha',
-    'version' => '0.0.1',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -15,7 +18,6 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'PpVlWnGVHgq9_RsMcc-s6ulyjy2cB9zs',
         ],
         'cache' => [
@@ -72,4 +74,4 @@ if (YII_ENV_DEV) {
     ];
 }
 
-return $config;
+return \yii\helpers\ArrayHelper::merge($common, $config);
