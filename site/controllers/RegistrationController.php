@@ -22,6 +22,7 @@ use app\models\User;
 use app\models\UserToLeader;
 use app\components\Event;
 use yii\db\Expression;
+use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -299,6 +300,18 @@ class RegistrationController extends Controller
     {
         return [
             RegistrationStatBehavior::class,
+            'access' => [
+                'class' => AccessControl::class,
+                'denyCallback' => function () {
+                    return $this->goBack();
+                },
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ]
+                ]
+            ]
         ];
     }
 

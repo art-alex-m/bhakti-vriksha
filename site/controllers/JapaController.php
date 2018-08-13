@@ -11,9 +11,11 @@ namespace app\controllers;
 
 use app\components\ActiveRecord;
 use app\components\GetAuthUserTrait;
+use app\rbac\Permissions;
 use app\models\Japa;
 use app\models\User;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -154,6 +156,42 @@ class JapaController extends Controller
         return $this->render('view', [
             'model' => $japa,
             'user' => $user,
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => [Permissions::PERMISSION_JAPA_LIST],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => [Permissions::PERMISSION_JAPA_CREATE],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => [Permissions::PERMISSION_JAPA_UPDATE],
+                        'roleParams' => ['japaId' => Yii::$app->request->get('id')],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => [Permissions::PERMISSION_JAPA_VIEW],
+                        'roleParams' => ['userId' => Yii::$app->request->get('id')],
+                    ]
+                ]
+            ]
         ]);
     }
 

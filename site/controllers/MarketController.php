@@ -9,6 +9,7 @@
 
 namespace app\controllers;
 
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 /**
@@ -28,5 +29,24 @@ class MarketController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
+        ]);
     }
 }

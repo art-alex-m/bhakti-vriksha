@@ -8,6 +8,7 @@
 
 namespace app\models;
 
+use app\rbac\Roles;
 use yii\base\Model;
 use Yii;
 
@@ -87,7 +88,7 @@ class SignupForm extends Model
     /**
      * Создает аккаунт пользователя в системе
      * @return User|null
-     * @throws \yii\base\Exception
+     * @throws \Exception
      */
     protected function signupUser()
     {
@@ -96,7 +97,9 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         if ($user->save()) {
-            /// TODO: Сделать присвоение роли по-умолчанию
+            $auth = Yii::$app->authManager;
+            $role = $auth->getRole(Roles::ROLE_BV_PARTICIPANT);
+            Yii::$app->authManager->assign($role, $user->id);
             return $user;
         }
         return null;

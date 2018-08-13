@@ -10,8 +10,10 @@
 namespace app\controllers;
 
 use app\components\GetAuthUserTrait;
+use app\rbac\Permissions;
 use app\models\Statistics;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
 
@@ -42,5 +44,24 @@ class ActivityController extends Controller
             'pagination' => false,
         ]);
         return $this->render('index', ['model' => $provider]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => [Permissions::PERMISSION_ACTIVITY_VIEW],
+                    ]
+                ]
+            ]
+        ]);
     }
 }
