@@ -10,6 +10,7 @@
 namespace app\models;
 
 use app\components\ActiveRecord;
+use app\components\SerializableTrait;
 use Yii;
 
 /**
@@ -23,8 +24,10 @@ use Yii;
  * @property int $userId Идентификатор пользователя
  * @property string $title Наименование города проживания
  */
-class Residence extends ActiveRecord
+class Residence extends ActiveRecord implements \Serializable
 {
+    use SerializableTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -38,7 +41,7 @@ class Residence extends ActiveRecord
             ],
             ['title', 'filter', 'filter' => 'trim'],
             [['userId', 'title'], 'required'],
-            ['title', 'string', 'length' => 100],
+            ['title', 'string', 'max' => 100],
             [
                 'userId',
                 'unique',

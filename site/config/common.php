@@ -11,6 +11,7 @@
 
 return [
     'version' => '1.0.0',
+    'language' => 'ru-RU',
     'components' => [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',

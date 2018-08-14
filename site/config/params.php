@@ -5,4 +5,5 @@ return [
     'pwdResetTokenLifeTime' => 24 * 60 * 60,
     'regConfirmTokenLifeTime' => 12 * 60 * 60,
     'regCodeLifeTime' => 3 * 24 * 60 * 60,
+    'noReplyEmail' => 'no-reply@example.com',
 ];

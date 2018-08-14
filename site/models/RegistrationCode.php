@@ -10,6 +10,8 @@
 namespace app\models;
 
 use app\components\GetConfigParamTrait;
+use app\components\GetDbTimestampTrait;
+use app\components\SerializableTrait;
 use yii\db\ActiveRecord;
 use Yii;
 use yii\db\Expression;
@@ -28,9 +30,13 @@ use yii\db\Expression;
  *
  * @property-read bool $isValid Проверяет действительность кода регистрации
  */
-class RegistrationCode extends ActiveRecord
+class RegistrationCode extends ActiveRecord implements \Serializable
 {
-    use GetConfigParamTrait;
+    use GetDbTimestampTrait,
+        GetConfigParamTrait,
+        SerializableTrait;
+
+    const SCENARIO_SEARCH = 'search';
 
     /**
      * {@inheritdoc}
@@ -50,11 +56,12 @@ class RegistrationCode extends ActiveRecord
             [
                 'code',
                 'unique',
+                'except' => self::SCENARIO_SEARCH,
                 'when' => function () {
                     return $this->getIsNewRecord();
                 }
             ],
-            [
+            [ ///FIXME
                 'expiredAt',
                 'integer',
                 'min' => time() + 1,
@@ -62,6 +69,7 @@ class RegistrationCode extends ActiveRecord
                     return $this->getIsNewRecord();
                 }
             ],
+            ['code', 'integer', 'on' => self::SCENARIO_SEARCH],
         ];
     }
 
@@ -78,6 +86,16 @@ class RegistrationCode extends ActiveRecord
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'code' => Yii::t('app', 'Code'),
+        ];
+    }
+
+    /**
      * Фабричный метод. Создает код регистрации пользователя
      *
      * @param int $userId Идентификатор пользователя-лидера
@@ -86,9 +104,10 @@ class RegistrationCode extends ActiveRecord
      */
     public static function create($userId, $length = 4)
     {
+        $time = microtime(true) + static::getConfigParam('regCodeLifeTime', 1);
         return new static([
             'userId' => $userId,
-            'expiredAt' => time() + static::getConfigParam('regCodeLifeTime', 1),
+            'expiredAt' => (string)static::getDbTimestamp($time),
             'code' => static::generateCode($length),
         ]);
     }
@@ -103,6 +122,21 @@ class RegistrationCode extends ActiveRecord
         return Yii::$app->db->createCommand()
             ->delete(static::tableName(), ['<', 'expiredAt', new Expression('NOW()')])
             ->execute();
+    }
+
+    /**
+     * Осуществляет поиск кода регистрации по идентификатору
+     * @param int $code
+     * @return null|static
+     */
+    public static function findByCode($code)
+    {
+        $model = new static(['scenario' => self::SCENARIO_SEARCH]);
+        $model->code = $code;
+        if ($model->validate('code')) {
+            return static::findOne($model->code);
+        }
+        return $model;
     }
 
     /**

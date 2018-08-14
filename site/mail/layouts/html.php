@@ -1,10 +1,19 @@
 <?php
+/**
+ * html.php
+ *
+ * Шаблон для отправки письма
+ *
+ * @date 17.08.2018
+ * @time 8:55
+ *
+ * @var $this \yii\web\View view component instance
+ * @var $message \yii\mail\MessageInterface the message being composed
+ * @var $content string main view render result
+ */
 
 use yii\helpers\Html;
 
-/* @var $this \yii\web\View view component instance */
-/* @var $message \yii\mail\MessageInterface the message being composed */
-/* @var $content string main view render result */
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"

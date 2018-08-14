@@ -11,6 +11,7 @@ namespace app\models;
 
 use app\components\GetUserTrait;
 use app\components\ActiveRecord;
+use app\components\SerializableTrait;
 use Yii;
 
 /**
@@ -25,10 +26,13 @@ use Yii;
  * @property string $firstName Имя
  * @property string $parentName Отчество
  * @property string $phone Контактный телефон
+ *
+ * @property-read string $fullName Полное имя пользователя
  */
-class Profile extends ActiveRecord
+class Profile extends ActiveRecord implements \Serializable
 {
-    use GetUserTrait;
+    use GetUserTrait,
+        SerializableTrait;
 
     /**
      * {@inheritdoc}
@@ -43,7 +47,7 @@ class Profile extends ActiveRecord
             ],
             [['lastName', 'firstName', 'parentName', 'phone'], 'filter', 'filter' => 'trim'],
             [['userId', 'lastName', 'firstName', 'parentName', 'phone'], 'required'],
-            [['lastName', 'firstName', 'parentName'], 'string', 'length' => 100],
+            [['lastName', 'firstName', 'parentName'], 'string', 'max' => 100],
             [
                 'userId',
                 'unique',
@@ -91,4 +95,13 @@ class Profile extends ActiveRecord
         ]);
     }
 
+    /**
+     * Возвращает строку с полным именем пользователя
+     * @return string
+     */
+    public function getFullName()
+    {
+        $fio = [$this->lastName, $this->firstName, $this->parentName];
+        return implode(' ', $fio);
+    }
 }

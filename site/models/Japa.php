@@ -10,6 +10,7 @@
 namespace app\models;
 
 use app\components\ActiveRecord;
+use app\components\SerializableTrait;
 use Yii;
 
 /**
@@ -25,8 +26,10 @@ use Yii;
  * @property int $userId Идентификатор пользователя
  * @property int $number Количество кругов
  */
-class Japa extends ActiveRecord
+class Japa extends ActiveRecord implements \Serializable
 {
+    use SerializableTrait;
+
     /**
      * {@inheritdoc}
      */

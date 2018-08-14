@@ -9,7 +9,6 @@
 
 namespace app\components;
 
-use yii\behaviors\TimestampBehavior;
 use Yii;
 
 /**
@@ -33,8 +32,6 @@ abstract class ActiveRecord extends \yii\db\ActiveRecord
         return [
             [
                 'class' => TimestampBehavior::class,
-                'createdAtAttribute' => 'createdAt',
-                'updatedAtAttribute' => 'updatedAt',
             ],
         ];
     }
