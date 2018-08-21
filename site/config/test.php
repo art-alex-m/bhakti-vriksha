@@ -30,6 +30,7 @@ $config = [
             'showScriptName' => true,
         ],
         'user' => [
+            'class' => 'app\components\User',
             'identityClass' => 'app\models\User',
         ],
         'request' => [

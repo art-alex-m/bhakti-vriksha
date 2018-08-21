@@ -27,6 +27,7 @@ class StatTypes
     const TYPE_CIRCLES_INPUT = 2; /// Ввод кругов джапы
     const TYPE_ACCOUNT_BLOCK = 3; /// Блокировка аккаунта
     const TYPE_NEW_USER = 4; /// Регистрация нового пользователя
+    const TYPE_SYSTEM_LOGOUT = 5; /// Выход из системы
 
     /**
      * Возвращает список типов событий статистики
@@ -41,6 +42,7 @@ class StatTypes
                 self::TYPE_CIRCLES_INPUT => Yii::t('app', 'Circles input'),
                 self::TYPE_ACCOUNT_BLOCK => Yii::t('app', 'Account block'),
                 self::TYPE_NEW_USER => Yii::t('app', 'New user'),
+                self::TYPE_SYSTEM_LOGOUT => Yii::t('app', 'User logout'),
             ];
         }
         return $types;
