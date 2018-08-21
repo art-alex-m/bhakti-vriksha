@@ -7,9 +7,9 @@
  * @date 17.08.2018
  * @time 8:55
  *
- * @var $this \yii\web\View view component instance
- * @var $message \yii\mail\MessageInterface the message being composed
- * @var $content string main view render result
+ * @var \yii\web\View $this view component instance
+ * @var \yii\mail\MessageInterface $message the message being composed
+ * @var string $content main view render result
  */
 
 use yii\helpers\Html;

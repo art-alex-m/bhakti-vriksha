@@ -344,7 +344,7 @@ class RegistrationController extends Controller
      */
     protected function sendRegActivationEmail(User $user, Token $token)
     {
-        $body = $this->render('regActivationMail', [
+        $body = $this->renderAjax('regActivationMail', [
             'token' => $token,
             'userName' => $user->profile->firstName . ' ' . $user->profile->parentName,
         ]);

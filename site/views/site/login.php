@@ -42,6 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php echo Html::a(Yii::t('app', 'Sign up'), ['/registration'],
                     ['class' => 'btn btn-default']) ?>
 
+                <?php echo Html::a('Забыли пароль?', ['/site/pwd-reset-request'],
+                    ['class' => 'btn']) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

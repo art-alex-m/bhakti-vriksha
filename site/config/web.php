@@ -33,6 +33,7 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@app/mail',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
@@ -52,6 +53,8 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/pwd-reset/request' => 'site/pwd-reset-request',
+                '/pwd-reset/confirm' => 'site/pwd-reset-confirm',
             ],
         ],
     ],
