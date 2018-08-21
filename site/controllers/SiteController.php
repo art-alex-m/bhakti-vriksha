@@ -8,8 +8,11 @@
 
 namespace app\controllers;
 
+use app\models\PwdResetForm;
+use app\models\PwdResetRequestForm;
 use Yii;
 use yii\filters\AccessControl;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -107,5 +110,49 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
         return $this->goHome();
+    }
+
+    /**
+     * Отправляет письмо с ссылкой на восстановление пароля
+     *
+     * @return string|Response
+     * @throws \Throwable
+     * @throws \yii\base\Exception
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionPwdResetRequest()
+    {
+        $model = new PwdResetRequestForm([
+            'bodyTpl' => '/site/pwdResetMail',
+        ]);
+        if ($model->load(Yii::$app->request->post()) && $model->reset()) {
+            Yii::$app->session->addFlash('success', Yii::t('app', 'Please check your email'));
+            return $this->goHome();
+        }
+        return $this->render('pwdResetRequest', ['model' => $model]);
+    }
+
+    /**
+     * Осуществляет смену пароля пользователя
+     *
+     * @param string $tkn
+     * @return string
+     * @throws \Throwable
+     * @throws \yii\base\Exception
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionPwdResetConfirm($tkn)
+    {
+        try {
+            $model = new PwdResetForm($tkn);
+            if ($model->load(Yii::$app->request->post()) && $model->reset()) {
+                Yii::$app->session->addFlash('success', Yii::t('app', 'Your password was changed'));
+                return $this->redirect(['/site/login']);
+            }
+        } catch (\Exception $e) {
+            throw new BadRequestHttpException($e->getMessage(), 0, $e);
+        }
+
+        return $this->render('pwdResetForm', ['model' => $model]);
     }
 }

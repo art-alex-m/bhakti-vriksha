@@ -55,11 +55,12 @@ class Mail extends Model
     public function send()
     {
         if ($this->validate()) {
-            return Yii::$app->mailer->compose()
+            return Yii::$app->mailer->compose([
+                'html' => 'dump',
+            ], ['content' => $this->body, 'title' => $this->subject])
                 ->setTo([$this->recipientEmail => $this->recipient])
                 ->setFrom([$this->senderEmail => $this->sender])
                 ->setSubject($this->subject)
-                ->setTextBody($this->body)
                 ->send();
         }
         return false;

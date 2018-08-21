@@ -15,6 +15,7 @@ return [
     'Sign up' => 'Регистрация',
     'Logout ({name})' => 'Выйти ({name})',
     'BV' => 'БВ',
+    'Password reset' => 'Восстановление пароля',
     /// app/models/LoginForm.php
     'Username' => 'Логин',
     'Password' => 'Пароль',
@@ -44,7 +45,7 @@ return [
     'Confirmation and password should be the same' => 'Пароль и повтор пароля должны совпадать',
     'Password confirmation' => 'Повтор пароля',
     'Email (login)' => 'Email (логин в системе)',
-    /// app/controllers/RegistrationController
+    /// app/controllers/RegistrationController.php
     'Registration activation' => 'Активация регистрации',
     'Cannot create registration activation token for user #{id}' =>
         'Ошибка при создании токена активации регистрации для пользователя #{id}',
@@ -53,4 +54,17 @@ return [
     'Wrong activation token' => 'Неверный токен активации регистрации',
     'Your account has been successfully activated' =>
         'Ваша учетная запись была успешно активирована',
+    /// app/models/PwdResetRequestForm.php
+    'There is no user with such email' =>
+        'Пользователя с таким адресом электронной почты не найдено',
+    'Cannot send email with error: {error}' => 'Ошибка при отправке письма: {error}',
+    'Cannot create password reset token with error: {error}' =>
+        'Ошибка при создании токена сброса пароля: {error}',
+    'Password reset for {app}' => 'Сброс пароля для {app}',
+    /// app/controllers/SiteController.php
+    'Please check your email' => 'Пожалуйста, проверьте вашу почту',
+    'Your password was changed' => 'Ваш пароль был успешно изменен',
+    // app/models/PwdResetForm.php
+    'Password reset token cannot be blank' => 'Токен сброса пароля должен быть передан',
+    'Wrong password reset token' => 'Ошибочный токен сброса пароля',
 ];
