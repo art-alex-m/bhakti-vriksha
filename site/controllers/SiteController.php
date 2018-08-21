@@ -83,7 +83,8 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            //return $this->goHome();
+            /// TODO: Сделать редирект на контроллер пользовательского функционала user/index
+            return $this->redirect(['/site/index']);
         }
 
         $model = new LoginForm();
@@ -105,7 +106,6 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 }
