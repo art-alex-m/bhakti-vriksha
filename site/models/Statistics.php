@@ -10,7 +10,7 @@
 namespace app\models;
 
 use app\components\StatTypes;
-use yii\behaviors\TimestampBehavior;
+use app\components\TimestampBehavior;
 use yii\db\ActiveRecord;
 use Yii;
 
@@ -37,7 +37,6 @@ class Statistics extends ActiveRecord
         return [
             [
                 'class' => TimestampBehavior::class,
-                'createdAtAttribute' => 'createdAt',
                 'updatedAtAttribute' => false,
             ],
         ];

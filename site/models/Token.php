@@ -9,7 +9,10 @@
 
 namespace app\models;
 
+use app\components\DbTime;
 use app\components\GetConfigParamTrait;
+use app\components\GetDbTimestampTrait;
+use app\components\GetUserTrait;
 use yii\db\ActiveRecord;
 use Yii;
 
@@ -24,14 +27,17 @@ use Yii;
  * @property int $id Идентификатор токена
  * @property int $userId Идентификатор пользователя
  * @property int $type Тип токена
- * @property int $expiredAt Срок действия
+ * @property string $expiredAt Срок действия
  * @property string $hash Хешь токена
  *
  * @property-read bool $isValid Указывает действителен токен или нет
+ * @property-read \DateTime $expiredAsDateTime Срок действия токена как DateTime
  */
 class Token extends ActiveRecord
 {
-    use GetConfigParamTrait;
+    use GetUserTrait,
+        GetConfigParamTrait,
+        GetDbTimestampTrait;
 
     const TYPE_PWD_RESET = 1; /// токен сброса пароля
     const TYPE_REG_CONFIRM = 2; /// токен подтверждения регистрации
@@ -61,13 +67,26 @@ class Token extends ActiveRecord
             ],
             [
                 'expiredAt',
-                'integer',
-                'min' => time() + 1,
+                'greaterThenNow',
                 'when' => function () {
                     return $this->getIsNewRecord();
                 }
             ],
         ];
+    }
+
+    /**
+     * Проверяет что срок деуствия токена в будущем
+     * @param string $attribute
+     * @param array $params
+     */
+    public function greaterThenNow($attribute, $params)
+    {
+        $time = strtotime($this->$attribute);
+        if ($time <= time()) {
+            $this->addError($attribute,
+                Yii::t('app', 'Token expired time should be greater then now'));
+        }
     }
 
     /**
@@ -83,6 +102,25 @@ class Token extends ActiveRecord
     }
 
     /**
+     * Возвращает представление время действия токена в виде объекта DateTime
+     * @return bool|\DateTime
+     */
+    public function getExpiredAsDateTime()
+    {
+        $dObj = new DbTime($this->expiredAt);
+        return $dObj;
+    }
+
+    /**
+     * Преобразование в строку
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->hash;
+    }
+
+    /**
      * Фабричный метод для создания токена сброса пароля
      *
      * @param int $userId Идентификатор пользователя [[app\models\User]]
@@ -91,10 +129,11 @@ class Token extends ActiveRecord
      */
     public static function createPwdResetToken($userId)
     {
+        $time = microtime(true) + static::getConfigParam('pwdResetTokenLifeTime', 1);
         return new static([
             'userId' => $userId,
             'type' => self::TYPE_PWD_RESET,
-            'expiredAt' => time() + static::getConfigParam('pwdResetTokenLifeTime', 1),
+            'expiredAt' => (string)static::getDbTimestamp($time),
             'hash' => Yii::$app->security->generateRandomString(48),
         ]);
     }
@@ -108,10 +147,11 @@ class Token extends ActiveRecord
      */
     public static function createRegConfirmToken($userId)
     {
+        $time = microtime(true) + static::getConfigParam('regConfirmTokenLifeTime', 1);
         return new static([
             'userId' => $userId,
             'type' => self::TYPE_REG_CONFIRM,
-            'expiredAt' => time() + static::getConfigParam('regConfirmTokenLifeTime', 1),
+            'expiredAt' => (string)static::getDbTimestamp($time),
             'hash' => Yii::$app->security->generateRandomString(),
         ]);
     }

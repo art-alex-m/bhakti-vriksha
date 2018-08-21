@@ -18,16 +18,17 @@ use \app\models\User;
  *
  * @package app\components
  * @since 1.0.0
- * @property User $user
+ *
+ * @property-read User $user
  */
 trait GetUserTrait
 {
     /**
      * Возвращает объект связанного класса пользователя
-     * @return null|User
+     * @return \yii\db\ActiveQuery
      */
     public function getUser()
     {
-        return $this->hasOne(User::class, ['userId' => 'id']);
+        return $this->hasOne(User::class, ['id' => 'userId']);
     }
 }

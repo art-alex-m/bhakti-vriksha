@@ -23,7 +23,7 @@ use Yii;
  * @since 1.0.0
  *
  * @property-read int $id Идентификатор пользователя
- * @property-read string $username Логин пользователя в системе
+ * @property string $username Логин пользователя в системе
  * @property string $passwordHash Хеш пароля пользователя
  * @property string $authKey Ключ авторизации
  * @property-write string $password Пароль
