@@ -7,6 +7,7 @@
  * Created by PhpStorm.
  * @date 14.08.18
  * @time 13:23
+ * @since 1.0.0
  */
 
 return [
@@ -67,4 +68,13 @@ return [
     // app/models/PwdResetForm.php
     'Password reset token cannot be blank' => 'Токен сброса пароля должен быть передан',
     'Wrong password reset token' => 'Ошибочный токен сброса пароля',
+    /// app/controllers/JapaController.php
+    'This month the data has already been entered' => 'В этом месяце данные о джапе уже были введены',
+    'Add new japa entry' => 'Добавлена новая информация по чтению джапы',
+    'Japa entry {d} was updated' => 'Запись джапы {d} была обновлена',
+    'Model not found by id #{id}' => 'По идентификатору #{id} запись не найдена',
+    /// app/views/japa/index.php
+    'JAPA_DAYS_LEFT' => '{n, plural, =1{# день} one{# день} few{# дня} other{# дней}}',
+    'JAPA_HOURS_LEFT' => '{n, plural, =1{# час} one{# час} few{# часа} other{# часов}}',
+    'JAPA_MIN_LEFT' => '{n, plural, =1{# минута} one{# минута} few{# минуты} other{# минут}}',
 ];

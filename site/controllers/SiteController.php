@@ -86,8 +86,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            /// TODO: Сделать редирект на контроллер пользовательского функционала user/index
-            return $this->redirect(['/site/index']);
+            return $this->redirect(['/my/index']);
         }
 
         $model = new LoginForm();
