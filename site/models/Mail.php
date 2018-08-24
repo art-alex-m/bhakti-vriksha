@@ -41,7 +41,14 @@ class Mail extends Model
     {
         return [
             [
-                ['recipient', 'recipientEmail', 'sender', 'senderEmail', 'subject', 'body'],
+                [
+                    'recipient',
+                    'recipientEmail',
+                    'sender',
+                    'senderEmail',
+                    'subject',
+                    'body',
+                ],
                 'required'
             ],
             [['recipientEmail', 'senderEmail'], 'email'],

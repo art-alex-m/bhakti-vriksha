@@ -79,4 +79,9 @@ return [
     'JAPA_MIN_LEFT' => '{n, plural, =1{# минута} one{# минута} few{# минуты} other{# минут}}',
     /// app/controllers/ProfileController.php
     'Profile was updated' => 'Профиль изменен',
+    /// app/models/ContactForm.php
+    '{app} contact message from {username}' => '{app}. Сообщение с сайта от {username}',
+    'Message' => 'Сообщение',
+    /// app/controllers/ContactController.php
+    'Your request has been sent' => 'Ваше обращение было отправлено',
 ];
