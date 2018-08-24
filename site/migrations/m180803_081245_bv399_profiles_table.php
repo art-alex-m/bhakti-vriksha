@@ -29,7 +29,7 @@ class m180803_081245_bv399_profiles_table extends Migration
             'lastName' => $this->string(100),
             'firstName' => $this->string(100),
             'parentName' => $this->string(100),
-            'phone' => $this->char(30),
+            'phone' => $this->string(30),
             'createdAt' => $this->timestamp(4),
             'updatedAt' => $this->timestamp(4),
         ]);

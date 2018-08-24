@@ -77,4 +77,6 @@ return [
     'JAPA_DAYS_LEFT' => '{n, plural, =1{# день} one{# день} few{# дня} other{# дней}}',
     'JAPA_HOURS_LEFT' => '{n, plural, =1{# час} one{# час} few{# часа} other{# часов}}',
     'JAPA_MIN_LEFT' => '{n, plural, =1{# минута} one{# минута} few{# минуты} other{# минут}}',
+    /// app/controllers/ProfileController.php
+    'Profile was updated' => 'Профиль изменен',
 ];
