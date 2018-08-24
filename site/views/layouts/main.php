@@ -49,6 +49,7 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $items[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
+        $items[] = ['label' => 'Профиль', 'url' => ['/profile/']];
         $items[] = ['label' => 'Круги', 'url' => ['/japa/']];
         $items[] = (
             Html::beginTag('li') .
