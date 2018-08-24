@@ -1,8 +1,16 @@
 <?php
-
-/* @var $this \yii\web\View */
-
-/* @var $content string */
+/**
+ * main.php
+ *
+ * Основное расположение сайта
+ *
+ * @date 24.08.2018
+ * @time 11:24
+ * @since 1.0.0
+ *
+ * @var $this \yii\web\View
+ * @var $content string
+ */
 
 use app\widgets\Alert;
 use yii\helpers\Html;
@@ -36,23 +44,28 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+    $items = [];
+    if (Yii::$app->user->isGuest) {
+        $items[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
+    } else {
+        $items[] = ['label' => 'Круги', 'url' => ['/japa/']];
+        $items[] = (
+            Html::beginTag('li') .
+            Html::beginForm(['/site/logout'], 'post') .
+            Html::submitButton(
+                Yii::t('app', 'Logout ({name})',
+                    ['name' => Yii::$app->user->identity->username]),
+                ['class' => 'btn btn-link logout']
+            ) .
+            Html::endForm() .
+            Html::endTag('li')
+        );
+    }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            Yii::$app->user->isGuest ? (
-            ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']]
-            ) : (
-                Html::beginTag('li') .
-                Html::beginForm(['/site/logout'], 'post') .
-                Html::submitButton(
-                    Yii::t('app', 'Logout ({name})',
-                        ['name' => Yii::$app->user->identity->username]),
-                    ['class' => 'btn btn-link logout']
-                ) .
-                Html::endForm() .
-                Html::endTag('li')
-            )
-        ],
+        'items' => $items,
     ]);
     NavBar::end();
     ?>

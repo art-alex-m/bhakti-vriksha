@@ -90,6 +90,22 @@ a.desc:after {
     margin: 0 0 15px 0;
 }
 
+.grid-view .summary {
+    text-align: right;
+}
+
+.grid-view .pagination {
+    margin-top: 0;
+}
+
+.grid-view td.action-cell {
+    text-align: center;
+}
+
+.table-bordered > thead > tr > th {
+    border-bottom-width: 4px;
+}
+
 /* align the logout "link" (button in form) of the navbar */
 .nav li > form > button.logout {
     padding: 15px;

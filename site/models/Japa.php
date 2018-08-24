@@ -10,6 +10,7 @@
 namespace app\models;
 
 use app\components\ActiveRecord;
+use app\components\JapaStatBehavior;
 use app\components\SerializableTrait;
 use Yii;
 
@@ -51,6 +52,13 @@ class Japa extends ActiveRecord implements \Serializable
                 'filter' => ['<>', 'status', User::STATUS_BLOCKED],
             ],
             ['number', 'integer', 'min' => 1],
+            [
+                'createdAt',
+                'safe',
+                'when' => function () {
+                    return $this->getIsNewRecord();
+                }
+            ]
         ]);
     }
 
@@ -63,6 +71,16 @@ class Japa extends ActiveRecord implements \Serializable
             'id' => Yii::t('app', 'ID'),
             'userId' => Yii::t('app', 'User ID'),
             'number' => Yii::t('app', 'Number of circles'),
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            JapaStatBehavior::class,
         ]);
     }
 }
