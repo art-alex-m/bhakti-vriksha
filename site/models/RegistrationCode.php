@@ -61,16 +61,29 @@ class RegistrationCode extends ActiveRecord implements \Serializable
                     return $this->getIsNewRecord();
                 }
             ],
-            [ ///FIXME
+            [
                 'expiredAt',
-                'integer',
-                'min' => time() + 1,
+                'greaterThenNow',
                 'when' => function () {
                     return $this->getIsNewRecord();
                 }
             ],
             ['code', 'integer', 'on' => self::SCENARIO_SEARCH],
         ];
+    }
+
+    /**
+     * Проверяет что срок действия токена в будущем
+     * @param string $attribute
+     * @param array $params
+     */
+    public function greaterThenNow($attribute, $params)
+    {
+        $time = strtotime($this->$attribute);
+        if ($time <= time()) {
+            $this->addError($attribute,
+                Yii::t('app', 'Registration code expired time should be greater then now'));
+        }
     }
 
     /**

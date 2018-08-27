@@ -76,7 +76,7 @@ class Token extends ActiveRecord
     }
 
     /**
-     * Проверяет что срок деуствия токена в будущем
+     * Проверяет что срок действия токена в будущем
      * @param string $attribute
      * @param array $params
      */

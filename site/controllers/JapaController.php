@@ -38,6 +38,7 @@ class JapaController extends Controller
      */
     public function actionIndex()
     {
+        Yii::$app->setTimeZone('Europe/Moscow');
         $japa = new ActiveDataProvider([
             'query' => $this->getAuthUser()->getJapa(),
             'sort' => ['defaultOrder' => ['createdAt' => SORT_DESC]],
@@ -107,6 +108,7 @@ class JapaController extends Controller
      */
     public function actionUpdate($id)
     {
+        Yii::$app->setTimeZone('Europe/Moscow');
         $japa = null;
         try {
             $japa = Japa::findOne($id);
