@@ -28,6 +28,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -51,6 +52,7 @@ AppAsset::register($this);
     } else {
         $items[] = ['label' => 'Профиль', 'url' => ['/profile/']];
         $items[] = ['label' => 'Круги', 'url' => ['/japa/']];
+        $items[] = ['label' => 'Связь', 'url' => ['/contact/']];
         $items[] = (
             Html::beginTag('li') .
             Html::beginForm(['/site/logout'], 'post') .
