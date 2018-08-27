@@ -84,4 +84,6 @@ return [
     'Message' => 'Сообщение',
     /// app/controllers/ContactController.php
     'Your request has been sent' => 'Ваше обращение было отправлено',
+    /// app/controllers/RegcodeController.php
+    'Registration code #{0} was created' => 'Был создан код регистрации #{0}',
 ];
