@@ -12,6 +12,7 @@ namespace app\controllers;
 use app\components\ActiveRecord;
 use app\components\GetAuthUserTrait;
 use app\models\Japa;
+use app\models\User;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\web\Controller;
@@ -127,6 +128,32 @@ class JapaController extends Controller
 
         return $this->render('form', [
             'model' => $japa,
+        ]);
+    }
+
+    /**
+     * Просмотр статистики джапы пользователя
+     *
+     * @param int $id Идентификатор пользователя системы
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView($id)
+    {
+        $user = User::findOne($id);
+        if (!$user instanceof User) {
+            throw new NotFoundHttpException(Yii::t('app', 'Model not found by id #{id}',
+                ['id' => $id]));
+        }
+
+        Yii::$app->setTimeZone('Europe/Moscow');
+        $japa = new ActiveDataProvider([
+            'query' => Japa::find()->andWhere(['=', 'userId', $id]),
+            'sort' => ['defaultOrder' => ['createdAt' => SORT_DESC]],
+        ]);
+        return $this->render('view', [
+            'model' => $japa,
+            'user' => $user,
         ]);
     }
 

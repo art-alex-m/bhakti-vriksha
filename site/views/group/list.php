@@ -27,6 +27,7 @@ echo \yii\grid\GridView::widget([
         'id',
         'profile.fullName',
         'profile.phone',
+        'residence.title',
         [
             'attribute' => 'createdAt',
             'format' => ['date', 'dd.MM.Y, HH:mm'],

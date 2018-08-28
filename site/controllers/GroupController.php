@@ -41,9 +41,30 @@ class GroupController extends Controller
         $user = $this->getAuthUser();
         $provider = new ActiveDataProvider([
             'query' => User::find()
-                ->with('profile')
+                ->joinWith('profile')
+                ->joinWith('residence')
                 ->leftJoin(['u2l' => UserToLeader::tableName()], 'users.id = u2l."userId"')
                 ->andWhere(['=', 'u2l.leaderId', $user->id]),
+            'sort' => [
+                'attributes' => [
+                    'id',
+                    'residence.title',
+                    'createdAt',
+                    'profile.fullName' => [
+                        'asc' => [
+                            'profile.lastName' => SORT_ASC,
+                            'profile.firstName' => SORT_ASC,
+                            'profile.parentName' => SORT_ASC,
+                        ],
+                        'desc' => [
+                            'profile.lastName' => SORT_DESC,
+                            'profile.firstName' => SORT_DESC,
+                            'profile.parentName' => SORT_DESC,
+                        ],
+                        'default' => SORT_ASC,
+                    ],
+                ]
+            ]
         ]);
         return $this->render('list', ['model' => $provider]);
     }

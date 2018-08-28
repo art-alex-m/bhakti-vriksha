@@ -17,6 +17,7 @@ return [
     'Logout ({name})' => 'Выйти ({name})',
     'BV' => 'БВ',
     'Password reset' => 'Восстановление пароля',
+    'City of residence' => 'Город',
     /// app/models/LoginForm.php
     'Username' => 'Логин',
     'Password' => 'Пароль',
