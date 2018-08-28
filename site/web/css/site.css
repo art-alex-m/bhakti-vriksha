@@ -106,6 +106,14 @@ a.desc:after {
     border-bottom-width: 4px;
 }
 
+.grid-view table {
+    margin-top: 15px;
+}
+
+.grid-view div.summary + table {
+    margin-top: 0;
+}
+
 /* align the logout "link" (button in form) of the navbar */
 .nav li > form > button.logout {
     padding: 15px;
