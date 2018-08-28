@@ -30,6 +30,9 @@ echo Html::tag('dt', 'Email');
 echo Html::tag('dd', Html::a($model->user->username,
     Yii::t('app', 'mailto:{0}<{1}>', [$model->fullName, $model->user->username])));
 
+echo Html::tag('dt', 'Город');
+echo Html::tag('dd', $model->user->residenceName);
+
 foreach ($model->attributes as $name => $value) {
     echo Html::tag('dt', $model->getAttributeLabel($name));
     if (in_array($name, $datesAttr)) {

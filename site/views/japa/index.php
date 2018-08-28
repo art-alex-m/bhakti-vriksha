@@ -49,11 +49,15 @@ if (!$newJapa) {
 echo \yii\grid\GridView::widget([
     'dataProvider' => $model,
     'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
+        [
+            'class' => 'yii\grid\SerialColumn',
+            'headerOptions' => ['width' => '5%'],
+        ],
         [
             'attribute' => 'createdAt',
             'format' => ['date', 'dd MMMM Y'],
             'label' => 'Дата',
+            'headerOptions' => ['width' => '15%'],
         ],
         'number',
         [
