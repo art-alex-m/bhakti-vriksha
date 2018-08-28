@@ -22,6 +22,9 @@ return [
     'Password' => 'Пароль',
     'Remember me' => 'Запомнить меня',
     'Incorrect username or password' => 'Неправильный логин или пароль',
+    'Created at' => 'Дата создания',
+    'Updated at' => 'Дата обновления',
+    'User ID' => 'Идентификатор пользователя',
     /// app/models/RegistrationCode.php
     'Code' => 'Код',
     'Code is invalid' => 'Неверный код регистрации',

@@ -14,6 +14,7 @@
  */
 
 use yii\bootstrap\Html;
+use yii\helpers\Url;
 
 $this->title = 'Участники группы';
 $this->params['breadcrumbs'][] = $this->title;
@@ -33,9 +34,19 @@ echo \yii\grid\GridView::widget([
         ],
         [
             'class' => 'yii\grid\ActionColumn',
-            'headerOptions' => ['class' => 'action-column', 'width' => '50'],
+            'headerOptions' => ['class' => 'action-column', 'width' => '60'],
             'contentOptions' => ['class' => 'action-cell'],
-            'template' => '{view}',
+            'template' => '{view}{stats}',
+            'buttons' => [
+                'stats' => function ($url, $model, $key) {
+                    $url = Url::to(['/japa/view', 'id' => $model->id]);
+                    return Html::a(Html::icon('stats'), $url, ['title' => 'Статистика джапы']);
+                },
+                'view' => function ($url, $model, $key) {
+                    $url = Url::to(['/profile/view', 'id' => $model->id]);
+                    return Html::a(Html::icon('eye-open'), $url, ['title' => 'Профиль']);
+                },
+            ]
         ],
     ],
 ]);

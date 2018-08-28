@@ -13,6 +13,7 @@ use app\components\GetAuthUserTrait;
 use app\models\Profile;
 use yii\web\Controller;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 /**
  * Class ProfileController
@@ -51,5 +52,23 @@ class ProfileController extends Controller
         }
 
         return $this->render('form', ['model' => $profile]);
+    }
+
+    /**
+     * Просмотр информации в профиле пользователя
+     *
+     * @param int $id Идентификатор пользователя системы
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionView($id)
+    {
+        $model = Profile::find()->andWhere(['=', 'userId', $id])->with('user')->one();
+        if (!$model instanceof Profile) {
+            throw new NotFoundHttpException(Yii::t('app', 'Model not found by id #{id}',
+                ['id' => $id]));
+        }
+        Yii::$app->setTimeZone('Europe/Moscow');
+        return $this->render('view', ['model' => $model]);
     }
 }

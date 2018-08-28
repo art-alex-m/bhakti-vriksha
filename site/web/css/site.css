@@ -102,6 +102,14 @@ a.desc:after {
     text-align: center;
 }
 
+.grid-view td.action-cell a {
+    margin-right: 5px;
+}
+
+.grid-view td.action-cell a:last-child {
+    margin-right: 0;
+}
+
 .table-bordered > thead > tr > th {
     border-bottom-width: 4px;
 }
@@ -112,6 +120,21 @@ a.desc:after {
 
 .grid-view div.summary + table {
     margin-top: 0;
+}
+
+dt {
+    margin-top: 1em;
+    font-weight: bold;
+    font-variant: small-caps;
+    font-size: 16px;
+}
+
+dt::after {
+    content: ":";
+}
+
+dd {
+    margin-left: 10pt;
 }
 
 /* align the logout "link" (button in form) of the navbar */
