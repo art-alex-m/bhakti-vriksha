@@ -13,7 +13,6 @@
  * @var \yii\data\ActiveDataProvider $model
  * @var bool $newJapa
  * @var DateInterval $japaTime
- * @var string $userName
  */
 
 use yii\bootstrap\Html;
@@ -22,8 +21,6 @@ $this->title = 'Статистика по кругам джапы';
 $this->params['breadcrumbs'][] = $this->title;
 
 echo Html::tag('h2', $this->title);
-
-echo Html::tag('h4', $userName);
 
 echo Html::tag('p', 'Данные о повторении кругов необходимо обновлять 1 раз в месяц');
 

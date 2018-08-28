@@ -54,7 +54,6 @@ class JapaController extends Controller
             'model' => $japa,
             'newJapa' => $this->checkNewJapa(),
             'japaTime' => $diff,
-            'userName' => $this->getAuthUser()->profile->fullName,
         ]);
     }
 
@@ -108,7 +107,6 @@ class JapaController extends Controller
      */
     public function actionUpdate($id)
     {
-        Yii::$app->setTimeZone('Europe/Moscow');
         $japa = null;
         try {
             $japa = Japa::findOne($id);

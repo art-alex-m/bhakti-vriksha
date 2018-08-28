@@ -92,6 +92,7 @@ class Profile extends ActiveRecord implements \Serializable
             'firstName' => Yii::t('app', 'First name'),
             'parentName' => Yii::t('app', 'Parent name'),
             'phone' => Yii::t('app', 'Phone number'),
+            'fullName' => Yii::t('app', 'FIO'),
         ]);
     }
 

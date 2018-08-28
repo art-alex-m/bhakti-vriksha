@@ -33,6 +33,7 @@ return [
     '{attribute} should be valid Russian phone number' =>
         '{attribute} номер должен быть российским номером телефона',
     'Please use russian phone mask 712345...' => 'Пожалуйста, используете маску 712345...',
+    'FIO' => 'ФИО',
     /// app/models/Residence.php
     'City' => 'Город',
     /// app/models/Japa.php

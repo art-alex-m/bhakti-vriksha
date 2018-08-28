@@ -50,6 +50,7 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $items[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
+        $items[] = ['label' => 'Группа', 'url' => ['/group/']];
         $items[] = ['label' => 'Коды', 'url' => ['/regcode/']];
         $items[] = ['label' => 'Профиль', 'url' => ['/profile/']];
         $items[] = ['label' => 'Круги', 'url' => ['/japa/']];
