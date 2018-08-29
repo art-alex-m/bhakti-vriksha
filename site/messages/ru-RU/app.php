@@ -12,12 +12,18 @@
 
 return [
     'Login' => 'Войти',
-    'System login' => 'Вход в систему',
     'Sign up' => 'Регистрация',
     'Logout ({name})' => 'Выйти ({name})',
     'BV' => 'БВ',
     'Password reset' => 'Восстановление пароля',
     'City of residence' => 'Город',
+    'Label' => 'Название',
+    /// app/components/StatTypes.php
+    'System login' => 'Вход в систему',
+    'User logout' => 'Выход из системы',
+    'Circles input' => 'Ввод кругов',
+    'Account block' => 'Блокировка учетной записи',
+    'New user' => 'Регистрация в системе',
     /// app/models/LoginForm.php
     'Username' => 'Логин',
     'Password' => 'Пароль',

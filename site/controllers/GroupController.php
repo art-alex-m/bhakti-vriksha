@@ -61,9 +61,9 @@ class GroupController extends Controller
                             'profile.firstName' => SORT_DESC,
                             'profile.parentName' => SORT_DESC,
                         ],
-                        'default' => SORT_ASC,
                     ],
-                ]
+                ],
+                'defaultOrder' => ['profile.fullName' => SORT_ASC],
             ]
         ]);
         return $this->render('list', ['model' => $provider]);

@@ -72,7 +72,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'UID'),
             'username' => Yii::t('app', 'Username'),
             'passwordHash' => Yii::t('app', 'Password hash'),
             'password' => Yii::t('app', 'Password'),

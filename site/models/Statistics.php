@@ -26,9 +26,24 @@ use Yii;
  * @property int $userId Идентификатор пользователя
  * @property string $createdAt Время события
  * @property int $type Тип события
+ *
+ * @property-read string|int $label Наименование типа действия
  */
 class Statistics extends ActiveRecord
 {
+    /**
+     * Возвращает наименование типа действия пользователя
+     * @return int|string
+     */
+    public function getLabel()
+    {
+        $types = StatTypes::getTypesList();
+        if (isset($types[$this->type])) {
+            return $types[$this->type];
+        }
+        return $this->type;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -52,6 +67,7 @@ class Statistics extends ActiveRecord
             'userId' => Yii::t('app', 'User ID'),
             'createdAt' => Yii::t('app', 'Created at'),
             'type' => Yii::t('app', 'Statistics type'),
+            'label' => Yii::t('app', 'Label'),
         ];
     }
 
