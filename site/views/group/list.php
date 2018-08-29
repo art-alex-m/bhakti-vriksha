@@ -26,7 +26,6 @@ echo \yii\grid\GridView::widget([
     'columns' => [
         'id',
         'profile.fullName',
-        'profile.phone',
         'residence.title',
         [
             'attribute' => 'createdAt',

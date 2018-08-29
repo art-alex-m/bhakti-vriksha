@@ -148,7 +148,7 @@ class JapaController extends Controller
 
         Yii::$app->setTimeZone('Europe/Moscow');
         $japa = new ActiveDataProvider([
-            'query' => Japa::find()->andWhere(['=', 'userId', $id]),
+            'query' => $user->getJapa(),
             'sort' => ['defaultOrder' => ['createdAt' => SORT_DESC]],
         ]);
         return $this->render('view', [

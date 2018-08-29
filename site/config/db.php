@@ -8,6 +8,8 @@ return [
     'username' => 'devoted',
     'password' => 'hare_krshna',
     'charset' => 'utf8',
+    'enableSchemaCache' => true,
+    'schemaCacheDuration' => 10,
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
