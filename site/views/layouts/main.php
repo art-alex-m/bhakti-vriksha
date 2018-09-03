@@ -56,6 +56,7 @@ AppAsset::register($this);
         $items[] = ['label' => 'Круги', 'url' => ['/japa/']];
         $items[] = ['label' => 'Связь', 'url' => ['/contact/']];
         $items[] = ['label' => 'Активность', 'url' => ['/activity/']];
+        $items[] = ['label' => 'Статистика', 'url' => ['/market/']];
         $items[] = (
             Html::beginTag('li') .
             Html::beginForm(['/site/logout'], 'post') .
