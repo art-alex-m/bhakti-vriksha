@@ -97,4 +97,9 @@ return [
     'Your request has been sent' => 'Ваше обращение было отправлено',
     /// app/controllers/RegcodeController.php
     'Registration code #{0} was created' => 'Был создан код регистрации #{0}',
+    /// app/controllers/C3ChartController.php
+    'Total participants' => 'Всего участников',
+    'Total circles' => 'Всего кругов',
+    'In previous period' => 'За прошлый',
+    'In current period' => 'В текущем',
 ];
