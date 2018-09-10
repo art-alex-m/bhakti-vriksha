@@ -18,6 +18,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\rbac\Permissions;
 
 AppAsset::register($this);
 ?>
@@ -50,8 +51,13 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $items[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
-        $items[] = ['label' => 'Группа', 'url' => ['/group/']];
-        $items[] = ['label' => 'Коды', 'url' => ['/regcode/']];
+        $user = Yii::$app->user;
+        if ($user->can(Permissions::PERMISSION_GROUP_LIST)) {
+            $items[] = ['label' => 'Группа', 'url' => ['/group/']];
+        }
+        if ($user->can(Permissions::PERMISSION_REGCODE_LIST)) {
+            $items[] = ['label' => 'Коды', 'url' => ['/regcode/']];
+        }
         $items[] = ['label' => 'Профиль', 'url' => ['/profile/']];
         $items[] = ['label' => 'Круги', 'url' => ['/japa/']];
         $items[] = ['label' => 'Связь', 'url' => ['/contact/']];

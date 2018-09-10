@@ -10,6 +10,7 @@
 namespace app\controllers;
 
 use app\models\ContactForm;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
 
@@ -41,5 +42,24 @@ class ContactController extends Controller
         }
 
         return $this->render('form', ['model' => $contact]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
+        ]);
     }
 }

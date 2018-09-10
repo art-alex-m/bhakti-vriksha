@@ -10,9 +10,11 @@
 namespace app\controllers;
 
 use app\components\GetAuthUserTrait;
+use app\rbac\Permissions;
 use app\models\User;
 use app\models\UserToLeader;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
 
@@ -67,5 +69,24 @@ class GroupController extends Controller
             ]
         ]);
         return $this->render('list', ['model' => $provider]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['list'],
+                        'roles' => [Permissions::PERMISSION_GROUP_LIST],
+                    ],
+                ]
+            ]
+        ]);
     }
 }

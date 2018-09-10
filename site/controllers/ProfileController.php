@@ -10,7 +10,9 @@
 namespace app\controllers;
 
 use app\components\GetAuthUserTrait;
+use app\rbac\Permissions;
 use app\models\Profile;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
 use yii\web\NotFoundHttpException;
@@ -70,5 +72,30 @@ class ProfileController extends Controller
         }
         Yii::$app->setTimeZone('Europe/Moscow');
         return $this->render('view', ['model' => $model]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => [Permissions::PERMISSION_PROFILE_UPDATE],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => [Permissions::PERMISSION_PROFILE_VIEW],
+                        'roleParams' => ['userId' => Yii::$app->request->get('id')],
+                    ]
+                ]
+            ]
+        ]);
     }
 }

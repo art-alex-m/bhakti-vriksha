@@ -10,8 +10,10 @@
 namespace app\controllers;
 
 use app\components\GetAuthUserTrait;
+use app\rbac\Permissions;
 use app\models\RegistrationCode;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
 
@@ -64,5 +66,29 @@ class RegcodeController extends Controller
         }
 
         return $this->redirect('index');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => [Permissions::PERMISSION_REGCODE_LIST],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => [Permissions::PERMISSION_REGCODE_CREATE],
+                    ]
+                ]
+            ]
+        ]);
     }
 }

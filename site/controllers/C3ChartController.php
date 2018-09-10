@@ -14,6 +14,7 @@ use app\components\DbTime;
 use app\models\C3JsonData;
 use app\models\JapaAmount;
 use app\models\UsersAmount;
+use yii\filters\AccessControl;
 use yii\rest\Controller;
 use Yii;
 
@@ -90,6 +91,25 @@ class C3ChartController extends Controller
         ]);
 
         return $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['users-amount', 'japa-amount'],
+                        'roles' => ['@'],
+                    ]
+                ]
+            ]
+        ]);
     }
 
     /**

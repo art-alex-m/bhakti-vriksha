@@ -34,6 +34,7 @@ use Yii;
  * @property-read User $leader Лидер группы пользователя
  * @property-read string $residenceName Наименование города проживания пользователя
  * @property-read Japa[] $japa Список статистики по чтению кругов Харе Кришна Махамантры
+ * @property-read \yii\rbac\Role[] $roles Список ролей пользователя
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -124,6 +125,16 @@ class User extends ActiveRecord implements IdentityInterface
     public function getProfile()
     {
         return $this->hasOne(Profile::class, ['userId' => 'id']);
+    }
+
+    /**
+     * Возвращает список ролей пользователя
+     * @return \yii\rbac\Role[]
+     */
+    public function getRoles()
+    {
+        $auth = Yii::$app->authManager;
+        return $auth->getRolesByUser($this->id);
     }
 
     /**
