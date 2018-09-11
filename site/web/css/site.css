@@ -122,6 +122,10 @@ a.desc:after {
     margin-top: 0;
 }
 
+.grid-view div.grid-items {
+    overflow-x: auto;
+}
+
 dt {
     margin-top: 1em;
     font-weight: bold;

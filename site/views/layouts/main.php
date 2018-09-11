@@ -52,16 +52,25 @@ AppAsset::register($this);
         $items[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
         $user = Yii::$app->user;
+        if ($user->can(Permissions::PERMISSION_USERS_LIST)) {
+            $items[] = ['label' => 'Пользователи', 'url' => ['/user/']];
+        }
         if ($user->can(Permissions::PERMISSION_GROUP_LIST)) {
             $items[] = ['label' => 'Группа', 'url' => ['/group/']];
         }
         if ($user->can(Permissions::PERMISSION_REGCODE_LIST)) {
             $items[] = ['label' => 'Коды', 'url' => ['/regcode/']];
         }
-        $items[] = ['label' => 'Профиль', 'url' => ['/profile/']];
-        $items[] = ['label' => 'Круги', 'url' => ['/japa/']];
+        if ($user->can(Permissions::PERMISSION_PROFILE_UPDATE)) {
+            $items[] = ['label' => 'Профиль', 'url' => ['/profile/']];
+        }
+        if ($user->can(Permissions::PERMISSION_JAPA_LIST)) {
+            $items[] = ['label' => 'Круги', 'url' => ['/japa/']];
+        }
+        if ($user->can(Permissions::PERMISSION_ACTIVITY_VIEW)) {
+            $items[] = ['label' => 'Активность', 'url' => ['/activity/']];
+        }
         $items[] = ['label' => 'Связь', 'url' => ['/contact/']];
-        $items[] = ['label' => 'Активность', 'url' => ['/activity/']];
         $items[] = ['label' => 'Статистика', 'url' => ['/market/']];
         $items[] = (
             Html::beginTag('li') .

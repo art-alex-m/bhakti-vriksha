@@ -29,8 +29,10 @@ class Permissions
     const PERMISSION_JAPA_VIEW = 'permission_japa_view'; /// просмотр списка джапы
     const PERMISSION_PROFILE_UPDATE = 'permission_profile_update'; /// обновление профиля
     const PERMISSION_PROFILE_VIEW = 'permission_profile_view'; /// просмотр профиля
+    const PERMISSION_PROFILE_VIEW_GROUP = 'permission_profile_view_group'; /// просмотр профиля участника группы
     const PERMISSION_REGCODE_LIST = 'permission_regcode_list'; /// просмотр списка кодов регистрации
     const PERMISSION_REGCODE_CREATE = 'permission_regcode_create'; /// создание кода регистрации
+    const PERMISSION_USERS_LIST = 'permission_users_list'; /// просмотр списка пользователей
 
     /**
      * Возвращает список всех возможных прав доступа
@@ -49,10 +51,13 @@ class Permissions
                 self::PERMISSION_JAPA_VIEW => Yii::t('app', 'Permission view japa entry'),
                 self::PERMISSION_PROFILE_UPDATE => Yii::t('app', 'Permission update own profile'),
                 self::PERMISSION_PROFILE_VIEW => Yii::t('app', 'Permission view user profile'),
+                self::PERMISSION_PROFILE_VIEW_GROUP =>
+                    Yii::t('app', 'Permission view user profile in group'),
                 self::PERMISSION_REGCODE_LIST =>
                     Yii::t('app', 'Permission view registration code list'),
                 self::PERMISSION_REGCODE_CREATE =>
                     Yii::t('app', 'Permission create registration code'),
+                self::PERMISSION_USERS_LIST => Yii::t('app', 'Permission view users list'),
             ];
         }
         return $list;

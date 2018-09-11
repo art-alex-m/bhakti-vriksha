@@ -42,6 +42,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_NEW = 1;
     const STATUS_ACTIVE = 10;
     const STATUS_BLOCKED = 80;
+    const STATUS_BLOCKED_USER = 81;
 
     /**
      * {@inheritdoc}
@@ -225,5 +226,23 @@ class User extends ActiveRecord implements IdentityInterface
     public static function tableName()
     {
         return '{{%users}}';
+    }
+
+    /**
+     * Список статусов пользователей системы
+     * @return array
+     */
+    public static function getStatusList()
+    {
+        static $list;
+        if (is_null($list)) {
+            $list = [
+                self::STATUS_NEW => Yii::t('app', 'New'),
+                self::STATUS_ACTIVE => Yii::t('app', 'Active'),
+                self::STATUS_BLOCKED => Yii::t('app', 'Blocked'),
+                self::STATUS_BLOCKED_USER => Yii::t('app', 'Blocked by user'),
+            ];
+        }
+        return $list;
     }
 }
