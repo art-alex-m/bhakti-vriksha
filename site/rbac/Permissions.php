@@ -33,6 +33,7 @@ class Permissions
     const PERMISSION_REGCODE_LIST = 'permission_regcode_list'; /// просмотр списка кодов регистрации
     const PERMISSION_REGCODE_CREATE = 'permission_regcode_create'; /// создание кода регистрации
     const PERMISSION_USERS_LIST = 'permission_users_list'; /// просмотр списка пользователей
+    const PERMISSION_USER_ROLE_UPDATE = 'permission_user_role_update'; /// смена роли пользователя
 
     /**
      * Возвращает список всех возможных прав доступа
@@ -58,6 +59,7 @@ class Permissions
                 self::PERMISSION_REGCODE_CREATE =>
                     Yii::t('app', 'Permission create registration code'),
                 self::PERMISSION_USERS_LIST => Yii::t('app', 'Permission view users list'),
+                self::PERMISSION_USER_ROLE_UPDATE => Yii::t('app', 'Permission change user role'),
             ];
         }
         return $list;

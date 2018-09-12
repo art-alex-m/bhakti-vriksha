@@ -120,4 +120,10 @@ return [
     'The coordinator of the city' => 'Координатор города',
     'The coordinator of the region' => 'Координатор региона',
     'Coordinator of Russian BV' => 'Координатор русскоязычной БВ',
+    /// app/controllers/UserController.php
+    'User #{0} roles were updated' => 'Роли пользователя #{0} были обновлены',
+    /// app/models/RoleChangeForm.php
+    'The role "{role}" is not available for assignment with your permissions' =>
+        'Роль "{role} " недоступна для назначения с вашими разрешениями',
+    'Roles' => 'Роль',
 ];
