@@ -18,6 +18,14 @@ return [
     'Password reset' => 'Восстановление пароля',
     'City of residence' => 'Город',
     'Label' => 'Название',
+    'User #{0} profile' => 'Профиль пользователя #{0}',
+    /// app/models/User.php
+    'Status' => 'Статус',
+    /// app/models/UsersSearch.php
+    'New' => 'Новый',
+    'Active' => 'Активный',
+    'Blocked' => 'Заблокирован',
+    'Blocked by user' => 'Заблокирован пользователем',
     /// app/components/StatTypes.php
     'System login' => 'Вход в систему',
     'User logout' => 'Выход из системы',
@@ -102,4 +110,14 @@ return [
     'Total circles' => 'Всего кругов',
     'In previous period' => 'За прошлый',
     'In current period' => 'В текущем',
+    /// app/rbac/Roles.php
+    'Super administrator' => 'Маха-администратор',
+    'BV participant' => 'Участник БВ',
+    'The leader of the group' => 'Слуга-лидер группы',
+    'The coordinator of the sector' => 'Координатор сектора',
+    'The coordinator of the district' => 'Координатор округа',
+    'The coordinator of the area' => 'Координатор маха-округа',
+    'The coordinator of the city' => 'Координатор города',
+    'The coordinator of the region' => 'Координатор региона',
+    'Coordinator of Russian BV' => 'Координатор русскоязычной БВ',
 ];

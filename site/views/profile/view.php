@@ -15,8 +15,7 @@
 
 use \yii\bootstrap\Html;
 
-$this->title = 'Профиль пользователя';
-$this->params['breadcrumbs'][] = ['label' => 'Группа', 'url' => ['/group/list']];
+$this->title = Yii::t('app', 'User #{0} profile', $model->userId);
 $this->params['breadcrumbs'][] = $this->title;
 
 echo Html::tag('h2', $this->title);

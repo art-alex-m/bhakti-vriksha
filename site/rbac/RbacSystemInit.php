@@ -75,9 +75,21 @@ class RbacSystemInit extends Model
      */
     public function initSupervisor()
     {
-        $baseRole = $this->auth->getRole(Roles::ROLE_GROUP_LEADER);
         $role = $this->auth->getRole(Roles::ROLE_SUPERVISOR);
-        $this->auth->addChild($role, $baseRole);
+
+        $permissions = [
+            Permissions::PERMISSION_PROFILE_UPDATE,
+            Permissions::PERMISSION_PROFILE_VIEW,
+            Permissions::PERMISSION_REGCODE_LIST,
+            Permissions::PERMISSION_REGCODE_CREATE,
+            Permissions::PERMISSION_ACTIVITY_VIEW,
+            Permissions::PERMISSION_USERS_LIST,
+        ];
+
+        foreach ($permissions as $name) {
+            $permission = $this->auth->getPermission($name);
+            $this->auth->addChild($role, $permission);
+        }
     }
 
     /**
@@ -156,7 +168,7 @@ class RbacSystemInit extends Model
         $baseRole = $this->auth->getRole(Roles::ROLE_BV_PARTICIPANT);
         $role = $this->auth->getRole(Roles::ROLE_GROUP_LEADER);
         $permissions = [
-            Permissions::PERMISSION_PROFILE_VIEW,
+            Permissions::PERMISSION_PROFILE_VIEW_GROUP,
             Permissions::PERMISSION_JAPA_VIEW,
             Permissions::PERMISSION_REGCODE_LIST,
             Permissions::PERMISSION_REGCODE_CREATE,
@@ -164,9 +176,12 @@ class RbacSystemInit extends Model
         ];
         $groupRule = new OnlyGroupRule();
         $this->auth->add($groupRule);
-        $permission = $this->auth->getPermission(Permissions::PERMISSION_PROFILE_VIEW);
+        $permission = $this->auth->getPermission(Permissions::PERMISSION_PROFILE_VIEW_GROUP);
         $permission->ruleName = $groupRule->name;
-        $this->auth->update(Permissions::PERMISSION_PROFILE_VIEW, $permission);
+        $this->auth->update(Permissions::PERMISSION_PROFILE_VIEW_GROUP, $permission);
+        $permissionA = $this->auth->getPermission(Permissions::PERMISSION_PROFILE_VIEW);
+        $this->auth->addChild($permission, $permissionA);
+
         $permission = $this->auth->getPermission(Permissions::PERMISSION_JAPA_VIEW);
         $permission->ruleName = $groupRule->name;
         $this->auth->update(Permissions::PERMISSION_JAPA_VIEW, $permission);
