@@ -65,7 +65,11 @@ class ProfileController extends Controller
      */
     public function actionView($id)
     {
-        $model = Profile::find()->andWhere(['=', 'userId', $id])->with('user')->one();
+        $model = Profile::find()
+            ->with('user')
+            ->andWhere(['=', 'userId', $id])
+            ->one();
+
         if (!$model instanceof Profile) {
             throw new NotFoundHttpException(Yii::t('app', 'Model not found by id #{id}',
                 ['id' => $id]));

@@ -27,7 +27,7 @@ echo Html::tag('h2', $this->title);
     <div class="col-lg-4">
 
         <?php
-        $form = ActiveForm::begin(['id' => 'profile']);
+        $form = ActiveForm::begin(['id' => 'role-change']);
         $available = $model->getAvailableRoles();
         if ($model->user) {
             $model->roles = array_keys($model->user->roles);

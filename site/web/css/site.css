@@ -126,6 +126,10 @@ a.desc:after {
     overflow-x: auto;
 }
 
+tr.blocked td, tr.blocked td * {
+    color: #737373;
+}
+
 dt {
     margin-top: 1em;
     font-weight: bold;

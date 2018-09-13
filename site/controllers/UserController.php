@@ -10,6 +10,7 @@
 namespace app\controllers;
 
 use app\models\RoleChangeForm;
+use app\models\StatusChangeForm;
 use app\models\UsersSearch;
 use app\rbac\Permissions;
 use yii\filters\AccessControl;
@@ -68,6 +69,32 @@ class UserController extends Controller
     }
 
     /**
+     * @param int $id Идентификатор пользователя
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionStatus($id)
+    {
+        $model = new StatusChangeForm(['id' => $id]);
+
+        if (!$model->validate('id')) {
+            throw new NotFoundHttpException(Yii::t('app', 'Model not found by id #{id}',
+                ['id' => $id]));
+        }
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->change()) {
+                Yii::$app->session->addFlash('success',
+                    Yii::t('app', 'User #{0} status was updated', $id));
+                return $this->refresh();
+            }
+        }
+
+        $model->setDefaultStatus();
+
+        return $this->render('status', ['model' => $model]);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -85,6 +112,11 @@ class UserController extends Controller
                         'allow' => true,
                         'actions' => ['role'],
                         'roles' => [Permissions::PERMISSION_USER_ROLE_UPDATE],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['status'],
+                        'roles' => [Permissions::PERMISSION_USER_STATUS_UPDATE],
                     ],
                 ]
             ]

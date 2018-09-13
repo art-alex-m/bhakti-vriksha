@@ -272,12 +272,14 @@ class RegistrationController extends Controller
 
         if ($token instanceof Token) {
             $user = $token->user;
-            $user->status = User::STATUS_ACTIVE;
-            if ($user->save()) {
-                $token->delete();
-                Yii::$app->session->addFlash('success',
-                    Yii::t('app', 'Your account has been successfully activated'));
-                return $this->redirect(['/site/login']);
+            if ($user->status == User::STATUS_NEW) {
+                $user->status = User::STATUS_ACTIVE;
+                if ($user->save()) {
+                    $token->delete();
+                    Yii::$app->session->addFlash('success',
+                        Yii::t('app', 'Your account has been successfully activated'));
+                    return $this->redirect(['/site/login']);
+                }
             }
         }
         throw new BadRequestHttpException(Yii::t('app', 'Wrong activation token'));

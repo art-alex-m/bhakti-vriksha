@@ -111,7 +111,7 @@ return [
     'In previous period' => 'За прошлый',
     'In current period' => 'В текущем',
     /// app/rbac/Roles.php
-    'Super administrator' => 'Маха-администратор',
+    'Super administrator' => 'Администратор',
     'BV participant' => 'Участник БВ',
     'The leader of the group' => 'Слуга-лидер группы',
     'The coordinator of the sector' => 'Координатор сектора',
@@ -122,6 +122,7 @@ return [
     'Coordinator of Russian BV' => 'Координатор русскоязычной БВ',
     /// app/controllers/UserController.php
     'User #{0} roles were updated' => 'Роли пользователя #{0} были обновлены',
+    'User #{0} status was updated' => 'Статус пользователя #{0} был обновлен',
     /// app/models/RoleChangeForm.php
     'The role "{role}" is not available for assignment with your permissions' =>
         'Роль "{role} " недоступна для назначения с вашими разрешениями',

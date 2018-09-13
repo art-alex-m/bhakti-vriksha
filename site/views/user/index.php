@@ -23,10 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 echo Html::tag('h2', $this->title);
 
+$blockedStatus = [UsersSearch::STATUS_BLOCKED, UsersSearch::STATUS_BLOCKED_USER];
+
 echo GridView::widget([
     'dataProvider' => $provider,
     'filterModel' => $model,
     'layout' => "{summary}\n<div class=\"grid-items\">{items}</div>\n{pager}",
+    'rowOptions' => function ($model) use ($blockedStatus) {
+        return in_array($model->status, $blockedStatus) ? ['class' => 'blocked'] : [];
+    },
     'columns' => [
         [
             'attribute' => 'id',
