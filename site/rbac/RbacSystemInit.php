@@ -85,6 +85,7 @@ class RbacSystemInit extends Model
             Permissions::PERMISSION_ACTIVITY_VIEW,
             Permissions::PERMISSION_USERS_LIST,
             Permissions::PERMISSION_USER_ROLE_UPDATE,
+            Permissions::PERMISSION_USER_STATUS_UPDATE,
         ];
 
         foreach ($permissions as $name) {
