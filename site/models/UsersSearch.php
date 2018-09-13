@@ -118,9 +118,15 @@ class UsersSearch extends User
     public function getRolesNames()
     {
         $list = Roles::getRolesList();
-        $roles = ArrayHelper::map($this->roles, 'name', function ($role) use ($list) {
-            return isset($list[$role->name]) ? $list[$role->name] : $role->name;
-        });
+        $userRoles = $this->roles;
+        $roles = array_filter(
+            $list,
+            function ($key) use ($userRoles) {
+                return isset($userRoles[$key]);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+
         return $roles;
     }
 

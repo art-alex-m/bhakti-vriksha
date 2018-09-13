@@ -9,11 +9,13 @@
 
 namespace app\controllers;
 
+use app\models\RoleChangeForm;
 use app\models\UsersSearch;
 use app\rbac\Permissions;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 /**
  * Class UserController
@@ -41,6 +43,31 @@ class UserController extends Controller
     }
 
     /**
+     * Изменяет роль пользователя
+     *
+     * @param int $id Идентификатор пользователя
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     */
+    public function actionRole($id)
+    {
+        $model = new RoleChangeForm(['id' => $id]);
+        if (!$model->validate('id')) {
+            throw new NotFoundHttpException(Yii::t('app', 'Model not found by id #{id}',
+                ['id' => $id]));
+        }
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->assign()) {
+                Yii::$app->session->addFlash('success',
+                    Yii::t('app', 'User #{0} roles were updated', $id));
+                return $this->refresh();
+            }
+        }
+        return $this->render('role', ['model' => $model]);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -53,6 +80,11 @@ class UserController extends Controller
                         'allow' => true,
                         'actions' => ['index'],
                         'roles' => [Permissions::PERMISSION_USERS_LIST],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['role'],
+                        'roles' => [Permissions::PERMISSION_USER_ROLE_UPDATE],
                     ],
                 ]
             ]
