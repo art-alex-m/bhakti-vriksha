@@ -23,7 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 echo Html::tag('h2', $this->title);
 
-echo Html::tag('h4', $user->profile->fullName);
+if ($user->profile) {
+    echo Html::tag('h4', $user->profile->fullName);
+}
 
 echo GridView::widget([
     'dataProvider' => $model,

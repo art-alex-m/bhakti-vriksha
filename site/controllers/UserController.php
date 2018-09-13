@@ -9,8 +9,11 @@
 
 namespace app\controllers;
 
+use app\components\Event;
+use app\components\UserBlockStatBehavior;
 use app\models\RoleChangeForm;
 use app\models\StatusChangeForm;
+use app\models\User;
 use app\models\UsersSearch;
 use app\rbac\Permissions;
 use yii\filters\AccessControl;
@@ -27,6 +30,8 @@ use yii\web\NotFoundHttpException;
  */
 class UserController extends Controller
 {
+    const EVENT_ACCOUNT_SELF_BLOCK = 'event_account_self_block';
+
     /**
      * Отображение списка пользователей системы
      * @return string
@@ -69,6 +74,8 @@ class UserController extends Controller
     }
 
     /**
+     * Изменяет статус пользователя в системе
+     *
      * @param int $id Идентификатор пользователя
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
@@ -95,6 +102,34 @@ class UserController extends Controller
     }
 
     /**
+     * Осуществялет сценарий добровольной блокировки аккаунта
+     * @return string|\yii\web\Response
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionBlock()
+    {
+        $doBlock = Yii::$app->request->post('do-self-block', false);
+        if ($doBlock) {
+            /** @var \app\models\User $user */
+            $user = Yii::$app->user->getIdentity(false);
+            if ($user->profile) {
+                $user->profile->delete();
+            }
+            $user->status = User::STATUS_BLOCKED_USER;
+            $user->save();
+            Yii::$app->session->addFlash('warning',
+                Yii::t('app', 'Your account {0} was blocked', $user->username));
+
+            $this->trigger(self::EVENT_ACCOUNT_SELF_BLOCK,
+                new Event(['context' => ['user' => $user]]));
+
+            return $this->goHome();
+        }
+        return $this->render('block');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -118,8 +153,14 @@ class UserController extends Controller
                         'actions' => ['status'],
                         'roles' => [Permissions::PERMISSION_USER_STATUS_UPDATE],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => ['block'],
+                        'roles' => ['@'],
+                    ],
                 ]
-            ]
+            ],
+            UserBlockStatBehavior::class,
         ]);
     }
 }

@@ -18,7 +18,6 @@ use yii\bootstrap\ActiveForm;
 use app\models\User;
 
 $this->title = Yii::t('app', 'Изменить статус пользователя #{0}', $model->id);
-
 $this->params['breadcrumbs'][] = $this->title;
 
 echo Html::tag('h2', $this->title);

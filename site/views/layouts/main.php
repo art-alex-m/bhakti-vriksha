@@ -13,7 +13,7 @@
  */
 
 use app\widgets\Alert;
-use yii\helpers\Html;
+use yii\bootstrap\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -72,17 +72,29 @@ AppAsset::register($this);
         }
         $items[] = ['label' => 'Связь', 'url' => ['/contact/']];
         $items[] = ['label' => 'Статистика', 'url' => ['/market/']];
-        $items[] = (
+        $logout = (
             Html::beginTag('li') .
             Html::beginForm(['/site/logout'], 'post') .
             Html::submitButton(
                 Yii::t('app', 'Logout ({name})',
-                    ['name' => Yii::$app->user->identity->username]),
-                ['class' => 'btn btn-link logout']
+                    ['name' => $user->getIdentity(false)->username]),
+                ['class' => 'btn logout']
             ) .
             Html::endForm() .
             Html::endTag('li')
         );
+        $items[] = [
+            'label' => Html::icon('user'),
+            'encode' => false,
+            'items' => [
+                $logout,
+                [
+                    'label' => 'Заблокировать',
+                    'url' => ['/user/block'],
+                    'options' => ['class' => 'block-link']
+                ],
+            ],
+        ];
     }
 
     echo Nav::widget([
