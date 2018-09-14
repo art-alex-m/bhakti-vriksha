@@ -118,7 +118,8 @@ a.desc:after {
     margin-top: 15px;
 }
 
-.grid-view div.summary + table {
+.grid-view div.summary + table,
+.grid-view div.grid-items table {
     margin-top: 0;
 }
 
@@ -147,8 +148,25 @@ dd {
 
 /* align the logout "link" (button in form) of the navbar */
 .nav li > form > button.logout {
-    padding: 15px;
+    padding: 8px 20px;
     border: none;
+    border-radius: unset;
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+.nav li > form > button.logout:hover {
+    background-color: #91f230;
+}
+
+.nav li.block-link {
+    margin-top: 1em;
+}
+
+.nav li.block-link a:hover {
+    background-color: #e64545;
+    color: #ffffff;
 }
 
 @media (max-width: 767px) {
@@ -156,7 +174,7 @@ dd {
         display: block;
         text-align: left;
         width: 100%;
-        padding: 10px 15px;
+        padding: 5px 15px 5px 25px;
     }
 }
 

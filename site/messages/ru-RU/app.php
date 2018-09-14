@@ -123,6 +123,7 @@ return [
     /// app/controllers/UserController.php
     'User #{0} roles were updated' => 'Роли пользователя #{0} были обновлены',
     'User #{0} status was updated' => 'Статус пользователя #{0} был обновлен',
+    'Your account {0} was blocked' => 'Ваша учетная запись {0} была заблокирована',
     /// app/models/RoleChangeForm.php
     'The role "{role}" is not available for assignment with your permissions' =>
         'Роль "{role} " недоступна для назначения с вашими разрешениями',

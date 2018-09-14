@@ -46,7 +46,8 @@ class GroupController extends Controller
                 ->joinWith('profile')
                 ->joinWith('residence')
                 ->leftJoin(['u2l' => UserToLeader::tableName()], 'users.id = u2l."userId"')
-                ->andWhere(['=', 'u2l.leaderId', $user->id]),
+                ->andWhere(['=', 'u2l.leaderId', $user->id])
+                ->andWhere(['=', 'status', User::STATUS_ACTIVE]),
             'sort' => [
                 'attributes' => [
                     'id',
