@@ -68,7 +68,7 @@ class RegistrationCode extends ActiveRecord implements \Serializable
                     return $this->getIsNewRecord();
                 }
             ],
-            ['code', 'integer', 'on' => self::SCENARIO_SEARCH],
+            ['code', 'match', 'pattern' => '~^\d+$~', 'on' => self::SCENARIO_SEARCH],
         ];
     }
 

@@ -45,6 +45,7 @@ class UsersSearch extends User
 
         $query = static::find()
             ->alias('u')
+            ->distinct()
             ->joinWith('profile')
             ->leftJoin(['auth' => $auth->assignmentTable], 'u.id = cast(auth.user_id as integer)');
 

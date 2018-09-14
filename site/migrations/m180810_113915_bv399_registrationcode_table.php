@@ -24,7 +24,7 @@ class m180810_113915_bv399_registrationcode_table extends Migration
     {
         $tbName = RegistrationCode::tableName();
         $this->createTable($tbName, [
-            'code' => 'integer primary key',
+            'code' => 'varchar(30) primary key',
             'userId' => $this->integer()->unsigned()->notNull(),
             'expiredAt' => $this->timestamp(4)->notNull(),
         ]);
