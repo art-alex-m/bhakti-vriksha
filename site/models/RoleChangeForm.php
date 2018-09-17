@@ -128,14 +128,14 @@ class RoleChangeForm extends Model
             $maxRole = Roles::ROLE_BV_PARTICIPANT;
             foreach ($user->roles as $role) {
                 $name = $role->name;
-                if ($range[$maxRole] < $range[$name]) {
+                if ($range[$maxRole] > $range[$name]) {
                     $maxRole = $name;
                 }
             }
             $this->availableRoles = array_filter(
                 Roles::getRolesList(),
                 function ($key) use ($maxRole, $range) {
-                    return $range[$maxRole] >= $range[$key];
+                    return $range[$maxRole] <= $range[$key];
                 },
                 ARRAY_FILTER_USE_KEY
             );

@@ -13,7 +13,6 @@ use app\components\OnlySearchTrait;
 use app\components\SearchTrait;
 use app\rbac\Roles;
 use yii\data\ActiveDataProvider;
-use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -23,9 +22,6 @@ use Yii;
  *
  * @package app\models
  * @since 1.0.0
- *
- * @property-read string $statusName Наименование статуса модели
- * @property-read array $rolesNames Список наименований ролей пользователя
  */
 class UsersSearch extends User
 {
@@ -95,40 +91,6 @@ class UsersSearch extends User
             [['profile.firstName', 'profile.lastName', 'profile.parentName'], 'string'],
             ['profile.phone', 'match', 'pattern' => '~^\d+$~'],
         ];
-    }
-
-    /**
-     * Возвращает наименование статуса модели
-     * @param User $user
-     * @return int|string
-     */
-    public function getStatusName()
-    {
-        $status = $this->status;
-        $list = static::getStatusList();
-        if (isset($list[$status])) {
-            return $list[$status];
-        }
-        return $status;
-    }
-
-    /**
-     * Возвращает список наименований ролей пользователя
-     * @return array
-     */
-    public function getRolesNames()
-    {
-        $list = Roles::getRolesList();
-        $userRoles = $this->roles;
-        $roles = array_filter(
-            $list,
-            function ($key) use ($userRoles) {
-                return isset($userRoles[$key]);
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-
-        return $roles;
     }
 
     /**

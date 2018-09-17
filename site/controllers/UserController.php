@@ -39,6 +39,7 @@ class UserController extends Controller
     public function actionIndex()
     {
         Yii::$app->setTimeZone('Europe/Moscow');
+        Yii::$app->user->setReturnUrl(['/user/']);
 
         $model = new UsersSearch();
         $provider = $model->search(Yii::$app->request->get());
@@ -67,7 +68,7 @@ class UserController extends Controller
             if ($model->assign()) {
                 Yii::$app->session->addFlash('success',
                     Yii::t('app', 'User #{0} roles were updated', $id));
-                return $this->refresh();
+                return $this->goBack();
             }
         }
         return $this->render('role', ['model' => $model]);
@@ -147,6 +148,7 @@ class UserController extends Controller
                         'allow' => true,
                         'actions' => ['role'],
                         'roles' => [Permissions::PERMISSION_USER_ROLE_UPDATE],
+                        'roleParams' => ['userId' => Yii::$app->request->get('id')],
                     ],
                     [
                         'allow' => true,
