@@ -38,7 +38,7 @@ echo Html::tag('h2', $this->title);
 
         <div class="form-group">
             <?= Html::a('Отмена',
-                ['/user/'],
+                Yii::$app->user->returnUrl,
                 ['class' => 'btn btn-default', 'style' => 'margin-right:5px;']) ?>
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
         </div>

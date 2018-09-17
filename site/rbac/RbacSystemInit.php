@@ -175,13 +175,21 @@ class RbacSystemInit extends Model
             Permissions::PERMISSION_REGCODE_LIST,
             Permissions::PERMISSION_REGCODE_CREATE,
             Permissions::PERMISSION_GROUP_LIST,
+            Permissions::PERMISSION_USER_ROLE_UPD_GROUP,
         ];
+
         $groupRule = new OnlyGroupRule();
         $this->auth->add($groupRule);
         $permission = $this->auth->getPermission(Permissions::PERMISSION_PROFILE_VIEW_GROUP);
         $permission->ruleName = $groupRule->name;
         $this->auth->update(Permissions::PERMISSION_PROFILE_VIEW_GROUP, $permission);
         $permissionA = $this->auth->getPermission(Permissions::PERMISSION_PROFILE_VIEW);
+        $this->auth->addChild($permission, $permissionA);
+
+        $permission = $this->auth->getPermission(Permissions::PERMISSION_USER_ROLE_UPD_GROUP);
+        $permission->ruleName = $groupRule->name;
+        $this->auth->update(Permissions::PERMISSION_USER_ROLE_UPD_GROUP, $permission);
+        $permissionA = $this->auth->getPermission(Permissions::PERMISSION_USER_ROLE_UPDATE);
         $this->auth->addChild($permission, $permissionA);
 
         $permission = $this->auth->getPermission(Permissions::PERMISSION_JAPA_VIEW);

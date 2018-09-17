@@ -9,6 +9,7 @@
 
 namespace app\models;
 
+use app\rbac\Roles;
 use yii\base\NotSupportedException;
 use app\components\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -35,6 +36,8 @@ use Yii;
  * @property-read string $residenceName Наименование города проживания пользователя
  * @property-read Japa[] $japa Список статистики по чтению кругов Харе Кришна Махамантры
  * @property-read \yii\rbac\Role[] $roles Список ролей пользователя
+ * @property-read string $statusName Наименование статуса модели
+ * @property-read array $rolesNames Список наименований ролей пользователя
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -185,6 +188,40 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Japa::class, ['userId' => 'id'])
             ->orderBy(['createdAt' => SORT_DESC]);
+    }
+
+    /**
+     * Возвращает наименование статуса модели
+     * @param User $user
+     * @return int|string
+     */
+    public function getStatusName()
+    {
+        $status = $this->status;
+        $list = static::getStatusList();
+        if (isset($list[$status])) {
+            return $list[$status];
+        }
+        return $status;
+    }
+
+    /**
+     * Возвращает список наименований ролей пользователя
+     * @return array
+     */
+    public function getRolesNames()
+    {
+        $list = Roles::getRolesList();
+        $userRoles = $this->roles;
+        $roles = array_filter(
+            $list,
+            function ($key) use ($userRoles) {
+                return isset($userRoles[$key]);
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+
+        return $roles;
     }
 
     /**

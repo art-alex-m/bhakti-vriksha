@@ -40,6 +40,8 @@ class GroupController extends Controller
     public function actionList()
     {
         Yii::$app->setTimeZone('Europe/Moscow');
+        Yii::$app->user->setReturnUrl(['/group/']);
+
         $user = $this->getAuthUser();
         $provider = new ActiveDataProvider([
             'query' => User::find()

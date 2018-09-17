@@ -23,20 +23,32 @@ echo Html::tag('h2', $this->title);
 
 echo \yii\grid\GridView::widget([
     'dataProvider' => $model,
+    'layout' => "{summary}\n<div class=\"grid-items\">{items}</div>\n{pager}",
     'columns' => [
         'id',
         'profile.fullName',
         'residence.title',
         [
+            'attribute' => 'role',
+            'label' => 'Роль',
+            'value' => function ($item) {
+                $link = empty($item->rolesNames)
+                    ? Yii::$app->formatter->nullDisplay
+                    : implode(', ', $item->rolesNames);
+
+                return $link;
+            }
+        ],
+        [
             'attribute' => 'createdAt',
             'format' => ['date', 'dd.MM.Y, HH:mm'],
-            'label' => 'Регистрация'
+            'label' => 'Регистрация',
+            'headerOptions' => ['width' => '12%'],
         ],
         [
             'class' => 'yii\grid\ActionColumn',
-            'headerOptions' => ['class' => 'action-column', 'width' => '60'],
-            'contentOptions' => ['class' => 'action-cell'],
-            'template' => '{view}{stats}',
+            'headerOptions' => ['class' => 'action-column', 'width' => '100'],
+            'template' => '{view}&nbsp;{stats}&nbsp;{role}',
             'buttons' => [
                 'stats' => function ($url, $model, $key) {
                     $url = Url::to(['/japa/view', 'id' => $model->id]);
@@ -45,6 +57,10 @@ echo \yii\grid\GridView::widget([
                 'view' => function ($url, $model, $key) {
                     $url = Url::to(['/profile/view', 'id' => $model->id]);
                     return Html::a(Html::icon('eye-open'), $url, ['title' => 'Профиль']);
+                },
+                'role' => function ($url, $model, $key) {
+                    $url = Url::to(['/user/role', 'id' => $model->id]);
+                    return Html::a(Html::icon('user'), $url, ['title' => 'Роль']);
                 },
             ]
         ],
