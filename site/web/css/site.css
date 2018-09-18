@@ -147,6 +147,31 @@ dd {
     margin-left: 10pt;
 }
 
+ul.nav.analytics {
+    margin: 1em 0;
+}
+
+ul.nav.analytics li {
+    border: 2px #e6e6e6 solid;
+    border-radius: 6px;
+}
+
+ul.nav.analytics li:last-child {
+    margin-left: 10px;
+}
+
+div.analytics.links .link {
+    display: inline-block;
+    padding: 2px 0;
+}
+
+div.analytics.links div.link.current {
+    background-color: #bdff87;
+    padding: 2px 10px;
+    border-radius: 3px;
+    margin: 0 1ex 0 1ex;
+}
+
 /* align the logout "link" (button in form) of the navbar */
 .nav li > form > button.logout {
     padding: 8px 20px;
@@ -176,6 +201,21 @@ dd {
         text-align: left;
         width: 100%;
         padding: 5px 15px 5px 25px;
+    }
+
+    ul.nav.analytics li > a {
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 413px) {
+    ul.nav.analytics li:last-child {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    div.analytics.links div.link.current {
+        margin: 0;
     }
 }
 

@@ -36,6 +36,7 @@ class Permissions
     const PERMISSION_USER_ROLE_UPDATE = 'permission_user_role_update'; /// смена роли пользователя
     const PERMISSION_USER_STATUS_UPDATE = 'permission_user_status_update'; /// смена статуса пользователя
     const PERMISSION_USER_ROLE_UPD_GROUP = 'permission_user_role_update_group'; /// смена роли пользователя в группе
+    const PERMISSION_STATISTICS_AGG = 'permission_statistics_aggregations'; /// просмотр аггрегированной статистики
 
     /**
      * Возвращает список всех возможных прав доступа
@@ -66,6 +67,8 @@ class Permissions
                     Yii::t('app', 'Permission change user status'),
                 self::PERMISSION_USER_ROLE_UPD_GROUP =>
                     Yii::t('app', 'Permission change user role in group'),
+                self::PERMISSION_STATISTICS_AGG =>
+                    Yii::t('app', 'Permission view aggregation analytics'),
             ];
         }
         return $list;
