@@ -21,10 +21,11 @@ use yii\db\Expression;
  */
 class DateTruncExpression extends Expression
 {
+    const PERIOD_HOUR = 'hour';
     const PERIOD_DAY = 'day';
+    const PERIOD_WEEK = 'week';
     const PERIOD_MONTH = 'month';
     const PERIOD_YEAR = 'year';
-    const PERIOD_HOUR = 'hour';
     const PERIOD_MILLENNIUM = 'millennium';
 
     /** @var string Наименование поля записи */

@@ -72,6 +72,9 @@ AppAsset::register($this);
         }
         $items[] = ['label' => 'Связь', 'url' => ['/contact/']];
         $items[] = ['label' => 'Статистика', 'url' => ['/market/']];
+        if ($user->can(Permissions::PERMISSION_STATISTICS_AGG)) {
+            $items[] = ['label' => 'Аналитика', 'url' => ['/statistics']];
+        }
         $logout = (
             Html::beginTag('li') .
             Html::beginForm(['/site/logout'], 'post') .

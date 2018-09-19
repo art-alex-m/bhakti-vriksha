@@ -18,6 +18,7 @@ echo Html::tag('h3', 'Число повторений кругов');
 
 echo \yii\bootstrap\Tabs::widget([
     'navType' => 'nav-pills',
+    'renderTabContent' => false,
     'items' => [
         ['label' => 'За месяц', 'linkOptions' => ['id' => 'chart-japa-day'], 'active' => true],
         ['label' => 'За год', 'linkOptions' => ['id' => 'chart-japa-month']],

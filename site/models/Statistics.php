@@ -84,7 +84,7 @@ class Statistics extends ActiveRecord
                 'targetAttribute' => 'id',
                 'targetClass' => User::class,
                 'message' => Yii::t('app', 'User should be created or active'),
-                'filter' => ['<>', 'status', User::STATUS_BLOCKED],
+                'filter' => ['not in', 'status', [User::STATUS_BLOCKED, User::STATUS_BLOCKED_USER]],
             ],
             [
                 'createdAt',
