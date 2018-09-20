@@ -31,17 +31,18 @@ $previous = clone $current->modify("-1 $period");
 $next = clone $current->modify("+2 $period");
 $now = new DbTime();
 
-$formatter = function (DbTime $d) use ($period) {
-    switch ($period) {
-        case DT::PERIOD_WEEK:
-            $format = 'dd.MM.yy';
-            break;
-        case DT::PERIOD_MONTH:
-            $format = 'MMM yyyy';
-            break;
-        default:
-            $format = 'dd LLL, EEEEEE';
-    }
+switch ($period) {
+    case DT::PERIOD_WEEK:
+        $format = 'dd.MM.yy';
+        break;
+    case DT::PERIOD_MONTH:
+        $format = 'MMM yyyy';
+        break;
+    default:
+        $format = 'dd LLL, EEEEEE';
+}
+
+$formatter = function (DbTime $d) use ($format) {
     return Yii::$app->formatter->asDate($d, $format);
 };
 

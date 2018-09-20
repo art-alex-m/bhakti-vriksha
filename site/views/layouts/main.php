@@ -61,20 +61,16 @@ AppAsset::register($this);
         if ($user->can(Permissions::PERMISSION_REGCODE_LIST)) {
             $items[] = ['label' => 'Коды', 'url' => ['/regcode/']];
         }
-        if ($user->can(Permissions::PERMISSION_PROFILE_UPDATE)) {
-            $items[] = ['label' => 'Профиль', 'url' => ['/profile/']];
-        }
         if ($user->can(Permissions::PERMISSION_JAPA_LIST)) {
             $items[] = ['label' => 'Круги', 'url' => ['/japa/']];
-        }
-        if ($user->can(Permissions::PERMISSION_ACTIVITY_VIEW)) {
-            $items[] = ['label' => 'Активность', 'url' => ['/activity/']];
         }
         $items[] = ['label' => 'Связь', 'url' => ['/contact/']];
         $items[] = ['label' => 'Статистика', 'url' => ['/market/']];
         if ($user->can(Permissions::PERMISSION_STATISTICS_AGG)) {
             $items[] = ['label' => 'Аналитика', 'url' => ['/statistics']];
         }
+
+        $items2 = [];
         $logout = (
             Html::beginTag('li') .
             Html::beginForm(['/site/logout'], 'post') .
@@ -86,17 +82,24 @@ AppAsset::register($this);
             Html::endForm() .
             Html::endTag('li')
         );
+        $items2[] = $logout;
+        if ($user->can(Permissions::PERMISSION_PROFILE_UPDATE)) {
+            $items2[] = ['label' => 'Профиль', 'url' => ['/profile/']];
+        }
+        if ($user->can(Permissions::PERMISSION_ACTIVITY_VIEW)) {
+            $items2[] = ['label' => 'Активность', 'url' => ['/activity/']];
+        }
+        $items2[] = ['label' => 'О системе', 'url' => ['/about/']];
+        $items2[] = [
+            'label' => 'Заблокировать',
+            'url' => ['/user/block'],
+            'options' => ['class' => 'block-link']
+        ];
+
         $items[] = [
             'label' => Html::icon('user'),
             'encode' => false,
-            'items' => [
-                $logout,
-                [
-                    'label' => 'Заблокировать',
-                    'url' => ['/user/block'],
-                    'options' => ['class' => 'block-link']
-                ],
-            ],
+            'items' => $items2,
         ];
     }
 
