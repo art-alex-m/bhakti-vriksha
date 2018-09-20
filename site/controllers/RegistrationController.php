@@ -127,7 +127,7 @@ class RegistrationController extends Controller
         $model = new Residence();
 
         if ($model->load($request->post()) &&
-            $model->validate(['title'])
+            $model->validate(['cityId'])
         ) {
             $data = serialize($model);
             Yii::$app->session->set('Residence', $data);

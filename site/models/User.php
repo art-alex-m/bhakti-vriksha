@@ -9,6 +9,7 @@
 
 namespace app\models;
 
+use app\components\GetStatusNameTrait;
 use app\rbac\Roles;
 use yii\base\NotSupportedException;
 use app\components\ActiveRecord;
@@ -31,16 +32,18 @@ use Yii;
  * @property int $status Статус учетной записи
  *
  * @property-read Profile $profile Профиль пользователя
- * @property-read Residence $residence Город проживания пользователя
+ * @property-read Residence $residence Связь с городом проживания пользователя
+ * @property-read City $city Город, в котором проживает пользователь
  * @property-read User $leader Лидер группы пользователя
  * @property-read string $residenceName Наименование города проживания пользователя
  * @property-read Japa[] $japa Список статистики по чтению кругов Харе Кришна Махамантры
  * @property-read \yii\rbac\Role[] $roles Список ролей пользователя
- * @property-read string $statusName Наименование статуса модели
  * @property-read array $rolesNames Список наименований ролей пользователя
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    use GetStatusNameTrait;
+
     /// Статусы пользователя в системе
     const STATUS_NEW = 1;
     const STATUS_ACTIVE = 10;
@@ -85,6 +88,7 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => Yii::t('app', 'Status'),
             'residenceName' => Yii::t('app', 'City of residence'),
             'residence' => Yii::t('app', 'City of residence'),
+            'city' => Yii::t('app', 'City of residence'),
             'profile' => Yii::t('app', 'User profile'),
             'leader' => Yii::t('app', 'Leader'),
             'japa' => Yii::t('app', 'Japa stat'),
@@ -142,7 +146,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Город проживания пользователя
+     * Связь городов с городом проживания пользователя
      * @return \yii\db\ActiveQuery
      */
     public function getResidence()
@@ -151,13 +155,22 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Объект города, в котором проживает пользователь
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCity()
+    {
+        return $this->hasOne(City::class, ['id' => 'cityId'])->via('residence');
+    }
+
+    /**
      * Возвращает имя города проживания пользователя
      * @return string
      */
     public function getResidenceName()
     {
-        if ($this->residence instanceof Residence) {
-            return $this->residence->title;
+        if ($this->city instanceof City) {
+            return $this->city->title;
         }
         return '';
     }
@@ -188,21 +201,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Japa::class, ['userId' => 'id'])
             ->orderBy(['createdAt' => SORT_DESC]);
-    }
-
-    /**
-     * Возвращает наименование статуса модели
-     * @param User $user
-     * @return int|string
-     */
-    public function getStatusName()
-    {
-        $status = $this->status;
-        $list = static::getStatusList();
-        if (isset($list[$status])) {
-            return $list[$status];
-        }
-        return $status;
     }
 
     /**

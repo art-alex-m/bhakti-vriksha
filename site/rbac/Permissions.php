@@ -37,6 +37,10 @@ class Permissions
     const PERMISSION_USER_STATUS_UPDATE = 'permission_user_status_update'; /// смена статуса пользователя
     const PERMISSION_USER_ROLE_UPD_GROUP = 'permission_user_role_update_group'; /// смена роли пользователя в группе
     const PERMISSION_STATISTICS_AGG = 'permission_statistics_aggregations'; /// просмотр аггрегированной статистики
+    const PERMISSION_CITY_LIST = 'permission_city_list'; /// просмотр списка городов
+    const PERMISSION_CITY_CREATE = 'permission_city_create'; /// создание новой записи города
+    const PERMISSION_CITY_UPDATE = 'permission_city_update'; /// обновление записи города
+    const PERMISSION_CITY_DELETE = 'permission_city_delete'; /// удаоение записи города
 
     /**
      * Возвращает список всех возможных прав доступа
@@ -69,6 +73,10 @@ class Permissions
                     Yii::t('app', 'Permission change user role in group'),
                 self::PERMISSION_STATISTICS_AGG =>
                     Yii::t('app', 'Permission view aggregation analytics'),
+                self::PERMISSION_CITY_LIST => Yii::t('app', 'Permission view cities list'),
+                self::PERMISSION_CITY_CREATE => Yii::t('app', 'Permission create new city record'),
+                self::PERMISSION_CITY_UPDATE => Yii::t('app', 'Permission update city record'),
+                self::PERMISSION_CITY_DELETE => Yii::t('app', 'Permission delete city record'),
             ];
         }
         return $list;

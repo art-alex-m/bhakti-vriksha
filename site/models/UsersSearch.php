@@ -41,7 +41,7 @@ class UsersSearch extends User
 
         $query = static::find()
             ->alias('u')
-            ->distinct()
+            ->select(['u.*', 'profile.*', 'auth.*'])
             ->joinWith('profile')
             ->leftJoin(['auth' => $auth->assignmentTable], 'u.id = cast(auth.user_id as integer)');
 
@@ -58,9 +58,9 @@ class UsersSearch extends User
             return $provider;
         }
 
-        $query->andFilterWhere(['=', 'id', $this->id]);
-        $query->andFilterWhere(['=', 'status', $this->status]);
-        $query->andFilterWhere(['~*', 'username', $this->username]);
+        $query->andFilterWhere(['=', 'u.id', $this->id]);
+        $query->andFilterWhere(['=', 'u.status', $this->status]);
+        $query->andFilterWhere(['~*', 'u.username', $this->username]);
         $query->andFilterWhere(['=', 'auth.item_name', $this->getExplicit('role')]);
         $query->andFilterWhere([
             '~*',
@@ -109,7 +109,10 @@ class UsersSearch extends User
     {
         return [
             'id',
-            'createdAt',
+            'createdAt' => [
+                'asc' => ['u.createdAt' => SORT_ASC],
+                'desc' => ['u.createdAt' => SORT_DESC],
+            ],
             'status',
             'username',
             'role' => [
