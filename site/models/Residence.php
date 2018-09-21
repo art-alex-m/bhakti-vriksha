@@ -22,7 +22,7 @@ use Yii;
  * @since 1.0.0
  *
  * @property int $userId Идентификатор пользователя
- * @property string $title Наименование города проживания
+ * @property string $cityId Идентификатор города проживания
  */
 class Residence extends ActiveRecord implements \Serializable
 {
@@ -35,13 +35,11 @@ class Residence extends ActiveRecord implements \Serializable
     {
         return array_merge(parent::rules(), [
             [
-                ['userId', 'title'],
+                ['userId', 'cityId'],
                 'filter',
                 'filter' => 'strip_tags'
             ],
-            ['title', 'filter', 'filter' => 'trim'],
-            [['userId', 'title'], 'required'],
-            ['title', 'string', 'max' => 100],
+            [['userId', 'cityId'], 'required'],
             [
                 'userId',
                 'unique',
@@ -56,7 +54,15 @@ class Residence extends ActiveRecord implements \Serializable
                 'targetAttribute' => 'id',
                 'targetClass' => User::class,
                 'message' => Yii::t('app', 'User should be created or active'),
-                'filter' => ['<>', 'status', User::STATUS_BLOCKED],
+                'filter' => ['not in', 'status', [User::STATUS_BLOCKED, User::STATUS_BLOCKED_USER]],
+            ],
+            [
+                'cityId',
+                'exist',
+                'targetAttribute' => 'id',
+                'targetClass' => City::class,
+                'message' => Yii::t('app', 'City should be created or active'),
+                'filter' => ['=', 'status', City::STATUS_ACTIVE],
             ],
         ]);
     }
@@ -68,7 +74,7 @@ class Residence extends ActiveRecord implements \Serializable
     {
         return array_merge(parent::attributeLabels(), [
             'userId' => Yii::t('app', 'User ID'),
-            'title' => Yii::t('app', 'City'),
+            'cityId' => Yii::t('app', 'City'),
         ]);
     }
 }

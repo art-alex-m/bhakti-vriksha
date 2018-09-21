@@ -25,6 +25,10 @@ echo Html::tag('h2', $this->title);
 
 $blockedStatus = [UsersSearch::STATUS_BLOCKED, UsersSearch::STATUS_BLOCKED_USER];
 
+\yii\widgets\Pjax::begin([
+    'enablePushState' => false,
+]);
+
 echo GridView::widget([
     'dataProvider' => $provider,
     'filterModel' => $model,
@@ -79,3 +83,5 @@ echo GridView::widget([
         ],
     ],
 ]);
+
+\yii\widgets\Pjax::end();

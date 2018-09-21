@@ -12,12 +12,15 @@
  * @var \app\models\Residence $model
  */
 
-use \yii\bootstrap\Html;
+use yii\bootstrap\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\City;
 
 $this->title = 'Регистрация. Шаг 4 из 6';
 $this->params['breadcrumbs'][] = $this->title;
 
+$list = ArrayHelper::map(City::getCitiesList(), 'id', 'title');
 ?>
 <h2>Введите город проживания</h2>
 <div class="row">
@@ -27,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         $form = ActiveForm::begin(['id' => 'step4']);
 
         echo $form
-            ->field($model, 'title')
-            ->textInput(['autofocus' => true])
+            ->field($model, 'cityId')
+            ->dropDownList($list)
             ->label('');
         ?>
 

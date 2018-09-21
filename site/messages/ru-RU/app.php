@@ -19,6 +19,11 @@ return [
     'City of residence' => 'Город',
     'Label' => 'Название',
     'User #{0} profile' => 'Профиль пользователя #{0}',
+    'Model "{0}" was created' => 'Запись "{0}" была создана',
+    'Model "{0}" was deleted' => 'Запись "{0}" была успешно удалена',
+    'Model "{0}" was updated' => 'Запись "{0}" была обновлена',
+    'Model "{0}" could not be deleted' => 'Запись "{0}" не может быть удалена',
+    'Model "{0}" was archived' => 'Запись "{0}" была переведа в архив',
     /// app/models/User.php
     'Status' => 'Статус',
     /// app/models/UsersSearch.php
@@ -26,6 +31,9 @@ return [
     'Active' => 'Активный',
     'Blocked' => 'Заблокирован',
     'Blocked by user' => 'Заблокирован пользователем',
+    /// app/models/City.php
+    'Archive' => 'В архиве',
+    'Title' => 'Заголовок',
     /// app/components/StatTypes.php
     'System login' => 'Вход в систему',
     'User logout' => 'Выход из системы',

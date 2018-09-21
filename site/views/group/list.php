@@ -27,7 +27,7 @@ echo \yii\grid\GridView::widget([
     'columns' => [
         'id',
         'profile.fullName',
-        'residence.title',
+        'city.title:text:Город',
         [
             'attribute' => 'role',
             'label' => 'Роль',

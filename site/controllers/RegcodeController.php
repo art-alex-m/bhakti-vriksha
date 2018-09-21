@@ -14,6 +14,7 @@ use app\rbac\Permissions;
 use app\models\RegistrationCode;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use Yii;
 
@@ -88,7 +89,13 @@ class RegcodeController extends Controller
                         'roles' => [Permissions::PERMISSION_REGCODE_CREATE],
                     ]
                 ]
-            ]
+            ],
+            'verbs' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'create' => ['post'],
+                ],
+            ],
         ]);
     }
 }

@@ -52,6 +52,9 @@ AppAsset::register($this);
         $items[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
         $user = Yii::$app->user;
+        if ($user->can(Permissions::PERMISSION_CITY_LIST)) {
+            $items[] = ['label' => 'Города', 'url' => ['/city/']];
+        }
         if ($user->can(Permissions::PERMISSION_USERS_LIST)) {
             $items[] = ['label' => 'Пользователи', 'url' => ['/user/']];
         }
