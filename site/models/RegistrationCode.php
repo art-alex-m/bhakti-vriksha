@@ -51,7 +51,7 @@ class RegistrationCode extends ActiveRecord implements \Serializable
                 'targetAttribute' => 'id',
                 'targetClass' => User::class,
                 'message' => Yii::t('app', 'User should be created or active'),
-                'filter' => ['<>', 'status', User::STATUS_BLOCKED],
+                'filter' => ['not in', 'status', [User::STATUS_BLOCKED, User::STATUS_BLOCKED_USER]],
             ],
             [
                 'code',
@@ -93,6 +93,10 @@ class RegistrationCode extends ActiveRecord implements \Serializable
     public function getIsValid()
     {
         if ($this->getIsNewRecord()) {
+            return false;
+        }
+        $creator = User::findOne($this->userId);
+        if (!$creator || $creator->status != User::STATUS_ACTIVE) {
             return false;
         }
         return strtotime($this->expiredAt) > time();
