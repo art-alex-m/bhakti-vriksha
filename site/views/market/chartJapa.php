@@ -16,6 +16,13 @@ use \yii\bootstrap\Html;
 
 echo Html::tag('h3', 'Число повторений кругов');
 
+$txt = <<<TXT
+На этой странице вы можете видеть график суммарного количества кругов джапы, 
+прочитанных всеми участниками проекта
+TXT;
+
+echo Html::tag('p', $txt);
+
 echo \yii\bootstrap\Tabs::widget([
     'navType' => 'nav-pills',
     'renderTabContent' => false,
