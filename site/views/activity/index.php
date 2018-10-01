@@ -19,7 +19,7 @@ use yii\grid\GridView;
 $this->title = 'Ваша активность на сайте';
 $this->params['breadcrumbs'][] = $this->title;
 
-echo Html::tag('h2', $this->title);
+echo Html::tag('p', 'На этой странице вы можете видеть свою активность на сайте');
 
 echo Html::tag('p', 'Показаны последние 10 записей');
 

@@ -18,7 +18,11 @@ use yii\bootstrap\Html;
 $this->title = 'Коды регистрации новых пользователей';
 $this->params['breadcrumbs'][] = $this->title;
 
-echo Html::tag('h2', $this->title);
+$txt = <<<TXT
+На этой странице вы можете сгенерировать новый код для регистрации участников своей группы
+TXT;
+
+echo Html::tag('p', $txt);
 
 echo Html::beginForm(['/regcode/create'], 'post');
 echo Html::submitButton(Html::icon('plus') . ' Добавить', [

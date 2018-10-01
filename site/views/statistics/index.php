@@ -24,8 +24,6 @@ use \yii\bootstrap\Tabs;
 $this->title = 'Внутренняя аналитика';
 $this->params['breadcrumbs'][] = $this->title;
 
-echo Html::tag('h2', $this->title);
-
 $today = clone $current;
 $previous = clone $current->modify("-1 $period");
 $next = clone $current->modify("+2 $period");

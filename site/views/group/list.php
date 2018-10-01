@@ -19,7 +19,7 @@ use yii\helpers\Url;
 $this->title = 'Участники группы';
 $this->params['breadcrumbs'][] = $this->title;
 
-echo Html::tag('h2', $this->title);
+echo Html::tag('p', 'На этой странице вы можете видеть список участников вашей группы');
 
 echo \yii\grid\GridView::widget([
     'dataProvider' => $model,

@@ -19,8 +19,6 @@ use \yii\bootstrap\Html;
 $this->title = 'Статистика рынка';
 $this->params['breadcrumbs'][] = $this->title;
 
-echo Html::tag('h2', $this->title);
-
 echo $this->render('chartUsers');
 echo Html::tag('br');
 echo $this->render('chartJapa');
