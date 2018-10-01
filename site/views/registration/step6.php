@@ -19,7 +19,7 @@ $this->title = 'Регистрация. Шаг 6 из 6';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<h2>Введите email и придумайте пароль</h2>
+<h2>Введите емайл и придумайте пароль</h2>
 
 <div class="row">
     <div class="col-lg-3">
