@@ -25,11 +25,8 @@ echo Html::tag('p', 'Показаны последние 10 записей');
 
 echo GridView::widget([
     'dataProvider' => $model,
+    'layout' => '{items}',
     'columns' => [
-        [
-            'class' => 'yii\grid\SerialColumn',
-            'headerOptions' => ['width' => '5%'],
-        ],
         [
             'attribute' => 'createdAt',
             'format' => ['date', 'dd.MM.Y, HH:mm:ss'],

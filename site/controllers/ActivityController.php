@@ -10,6 +10,7 @@
 namespace app\controllers;
 
 use app\components\GetAuthUserTrait;
+use app\components\StatTypes;
 use app\rbac\Permissions;
 use app\models\Statistics;
 use yii\data\ActiveDataProvider;
@@ -37,9 +38,15 @@ class ActivityController extends Controller
     public function actionIndex()
     {
         Yii::$app->setTimeZone('Europe/Moscow');
+
         $user = $this->getAuthUser();
+        $query = Statistics::find()
+            ->andWhere(['=', 'userId', $user->id])
+            ->andWhere(['<>', 'type', StatTypes::TYPE_SYSTEM_LOGOUT])
+            ->limit(10);
+
         $provider = new ActiveDataProvider([
-            'query' => Statistics::find()->andWhere(['=', 'userId', $user->id])->limit(10),
+            'query' => $query,
             'sort' => ['defaultOrder' => ['createdAt' => SORT_DESC]],
             'pagination' => false,
         ]);
