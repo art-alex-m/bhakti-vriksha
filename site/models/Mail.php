@@ -33,6 +33,10 @@ class Mail extends Model
     public $recipient;
     /** @var string Электронный адрес получателя */
     public $recipientEmail;
+    /** @var string Имя получателя для оформления ответа на письмо */
+    public $replyTo;
+    /** @var string Адрес электронной почты для ответа на письмо */
+    public $replyToEmail;
 
     /**
      * {@inheritdoc}
@@ -51,7 +55,7 @@ class Mail extends Model
                 ],
                 'required'
             ],
-            [['recipientEmail', 'senderEmail'], 'email'],
+            [['recipientEmail', 'senderEmail', 'replyToEmail'], 'email'],
         ];
     }
 
@@ -62,13 +66,18 @@ class Mail extends Model
     public function send()
     {
         if ($this->validate()) {
-            return Yii::$app->mailer->compose([
+            $mail = Yii::$app->mailer->compose([
                 'html' => 'dump',
             ], ['content' => $this->body, 'title' => $this->subject])
                 ->setTo([$this->recipientEmail => $this->recipient])
                 ->setFrom([$this->senderEmail => $this->sender])
-                ->setSubject($this->subject)
-                ->send();
+                ->setSubject($this->subject);
+
+            if ($this->replyToEmail) {
+                $mail->setReplyTo([$this->replyToEmail => $this->replyTo]);
+            }
+
+            return $mail->send();
         }
         return false;
     }

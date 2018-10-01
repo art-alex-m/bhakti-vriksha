@@ -14,6 +14,12 @@
  * @var string $body Текст обращения
  * @var DateTime $contactDate Дата создания письма
  */
+
+$userName = $user->username;
+if ($user->profile) {
+    $userName = $user->profile->fullName;
+}
+
 ?>
 <style>
     dt {
@@ -28,7 +34,9 @@
 </style>
 <dl>
     <dt>Пользователь</dt>
-    <dd>#<?= $user->id ?> <?= $user->profile->fullName ?></dd>
+    <dd>#<?= $user->id ?> <?= $userName ?></dd>
+    <dt>Email</dt>
+    <dd><a href="mailto:<?= $user->username ?>"><?= $user->username ?></a></dd>
     <dt>Дата</dt>
     <dd><?= $contactDate->format('d-m-Y H:i:s T') ?></dd>
     <dt>Содержание</dt>

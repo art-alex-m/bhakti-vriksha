@@ -48,17 +48,26 @@ class ContactForm extends Mail
     public function send()
     {
         $user = $this->getAuthUser();
-        $userName = $user->profile->fullName;
+        $userName = $user->username;
+        if ($user->profile) {
+            $userName = $user->profile->fullName;
+        }
 
         $this->recipient = Yii::t('app', '{0} admin', Yii::$app->name);
         $this->recipientEmail = $this->getConfigParam('adminEmail');
-        $this->sender = Yii::t('app', '{0}. No-reply', Yii::$app->name);
+        $this->sender = Yii::t('app', 'Holly name market');
         $this->senderEmail = $this->getConfigParam('noReplyEmail');
         $this->body = $this->renderBody();
+        $this->replyToEmail = $user->username;
+        $this->replyTo = $userName;
         $this->subject = Yii::t('app', '{app} contact message from {username}', [
             'app' => Yii::$app->name,
             'username' => $userName,
         ]);
+
+        if (!$this->validate('replyToEmail')) {
+            $this->replyToEmail = null;
+        }
 
         return parent::send();
     }
