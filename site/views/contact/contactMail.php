@@ -26,6 +26,7 @@ if ($user->profile) {
         margin-top: 1em;
         font-weight: bold;
         font-variant: small-caps;
+        color: grey;
     }
 
     dt::after {

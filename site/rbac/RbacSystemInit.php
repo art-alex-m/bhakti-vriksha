@@ -230,6 +230,12 @@ class RbacSystemInit extends Model
         $permission->ruleName = $ownJapa->name;
         $this->auth->update(Permissions::PERMISSION_JAPA_UPDATE, $permission);
 
+        $ownProfile = new UpdateOwnProfileRule();
+        $this->auth->add($ownProfile);
+        $permission = $this->auth->getPermission(Permissions::PERMISSION_PROFILE_UPDATE);
+        $permission->ruleName = $ownProfile->name;
+        $this->auth->update(Permissions::PERMISSION_PROFILE_UPDATE, $permission);
+
         foreach ($permissions as $name) {
             $permission = $this->auth->getPermission($name);
             $this->auth->addChild($role, $permission);

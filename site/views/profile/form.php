@@ -16,12 +16,10 @@
 use yii\bootstrap\ActiveForm;
 use \yii\bootstrap\Html;
 
-$this->title = 'Профиль пользователя';
+$this->title = 'Изменить профиль пользователя';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<h2><?= Html::encode($this->title) ?></h2>
-
 <div class="row">
     <div class="col-lg-3">
 
@@ -38,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="form-group">
             <?= Html::a('Отмена',
-                ['/profile/'],
+                ['/profile/view', 'id' => $model->userId],
                 ['class' => 'btn btn-default', 'style' => 'margin-right:5px;']
             ); ?>
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
