@@ -32,6 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ->field($model, 'text')
             ->textarea(['maxlength' => 3000, 'rows' => 10])
             ->label('');
+
+        echo $form->errorSummary($model);
         ?>
 
         <div class="form-group">

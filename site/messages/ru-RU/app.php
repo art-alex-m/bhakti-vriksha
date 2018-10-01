@@ -109,6 +109,7 @@ return [
     /// app/models/ContactForm.php
     '{app} contact message from {username}' => '{app}. Сообщение с сайта от {username}',
     'Message' => 'Сообщение',
+    'Holly name market' => 'Рынок Святого Имени',
     /// app/controllers/ContactController.php
     'Your request has been sent' => 'Ваше обращение было отправлено',
     /// app/controllers/RegcodeController.php

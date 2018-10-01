@@ -6,8 +6,7 @@
 #### Развертывание
 1. создать роль и базу данных
 2. изменить кофигурацию БД и хеши куков в приложении 
-3. composer install 
+3. composer install --no-dev
 4. ./yii migrate --migrationPath=@yii/rbac/migrations
-5. ./yii migrate
-6. ./yii rbac
-
+5. ./yii rbac
+6. ./yii migrate

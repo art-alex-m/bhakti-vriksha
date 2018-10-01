@@ -368,8 +368,9 @@ class RegistrationController extends Controller
             'recipientEmail' => $user->username,
             'recipient' => $user->profile->fullName,
             'subject' => Yii::t('app', 'Registration activation'),
-            'sender' => 'No-reply',
+            'sender' => Yii::t('app', 'Holly name market'),
             'senderEmail' => $this->getConfigParam('noReplyEmail', 'no-reply@example.com'),
+            'replyToEmail' => $this->getConfigParam('adminEmail', 'admin@example.com'),
         ]);
         if (!$mail->send()) {
             throw new \RuntimeException(Yii::t('app',

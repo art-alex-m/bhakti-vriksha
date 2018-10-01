@@ -67,11 +67,17 @@ class PwdResetRequestForm extends Model
             $token = $this->createToken($user);
 
             if (!$token->isNewRecord) {
+                $userName = $user->username;
+                if ($user->profile) {
+                    $userName = $user->profile->fullName;
+                }
+
                 $mail = new Mail([
-                    'sender' => 'No-reply',
+                    'sender' => Yii::t('app', 'Holly name market'),
                     'senderEmail' => static::getConfigParam('noReplyEmail'),
-                    'recipient' => $user->profile->fullName,
+                    'recipient' => $userName,
                     'recipientEmail' => $this->email,
+                    'replyToEmail' => static::getConfigParam('adminEmail'),
                     'subject' => Yii::t('app', 'Password reset for {app}',
                         ['app' => Yii::$app->name]),
                     'body' => $this->renderEmailBody($user, $token),
