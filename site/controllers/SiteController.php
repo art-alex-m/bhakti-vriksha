@@ -8,9 +8,9 @@
 
 namespace app\controllers;
 
+use app\components\GetReturnUriHelper;
 use app\models\PwdResetForm;
 use app\models\PwdResetRequestForm;
-use app\rbac\Permissions;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
@@ -78,19 +78,12 @@ class SiteController extends Controller
     {
         $user = Yii::$app->user;
         if (!$user->isGuest) {
-            if ($user->can(Permissions::PERMISSION_USERS_LIST)) {
-                $uri = ['/user/'];
-            } elseif ($user->can(Permissions::PERMISSION_JAPA_LIST)) {
-                $uri = ['/japa/'];
-            } else {
-                $uri = ['/market/'];
-            }
-            return $this->redirect($uri);
+            return $this->redirect(GetReturnUriHelper::getUri($user));
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(GetReturnUriHelper::getUri(Yii::$app->user));
         }
 
         $model->password = '';

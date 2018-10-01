@@ -10,6 +10,7 @@
 namespace app\controllers;
 
 use app\components\GetConfigParamTrait;
+use app\components\GetReturnUriHelper;
 use app\components\RegistrationStatBehavior;
 use app\models\Japa;
 use app\models\Mail;
@@ -305,7 +306,8 @@ class RegistrationController extends Controller
             'access' => [
                 'class' => AccessControl::class,
                 'denyCallback' => function () {
-                    return $this->goBack();
+                    $uri = GetReturnUriHelper::getUri();
+                    return $this->redirect($uri);
                 },
                 'rules' => [
                     [

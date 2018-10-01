@@ -20,9 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<h1>Центр развития рынка Святого Имени</h1>
-
-<p>ИСККОН (Россия)</p>
+<h2>Центр развития рынка Святого Имени. ИСККОН (Россия)</h2>
 
 <div class="row">
     <div class="col-lg-3">
@@ -41,6 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="form-group">
             <?= Html::submitButton('Далее',
                 ['class' => 'btn btn-success', 'name' => 'registration-step1', 'value' => 1]) ?>
+            <?= Html::a('У меня уже есть аккаунт', ['/site/login'],
+                ['style' => ['display' => 'block', 'margin-top' => '1em']]) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
