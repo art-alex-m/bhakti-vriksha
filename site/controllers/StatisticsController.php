@@ -11,9 +11,9 @@ namespace app\controllers;
 
 use app\components\DateTruncExpression as DT;
 use app\components\DbTime;
+use app\components\StatTypesDataProvider;
 use app\models\StatAggregation;
 use app\rbac\Permissions;
-use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
@@ -50,19 +50,10 @@ class StatisticsController extends Controller
                 new DT($p, "cast('$date' as date)"),
             ]);
 
-        $provider = new ActiveDataProvider([
+        $provider = new StatTypesDataProvider([
             'query' => $query,
             'pagination' => false,
-            'sort' => [
-                'defaultOrder' => ['label' => SORT_ASC],
-                'attributes' => [
-                    'total',
-                    'label' => [
-                        'asc' => ['type' => SORT_ASC],
-                        'desc' => ['type' => SORT_DESC],
-                    ],
-                ],
-            ],
+            'sort' => false,
         ]);
 
         return $this->render('index', [

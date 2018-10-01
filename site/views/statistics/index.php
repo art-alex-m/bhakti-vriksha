@@ -95,7 +95,8 @@ echo GridView::widget([
     'layout' => '{items}',
     'columns' => [
         [
-            'class' => 'yii\grid\SerialColumn',
+            'attribute' => 'type',
+            'label' => 'Тип',
             'headerOptions' => ['width' => '5%'],
         ],
         [
