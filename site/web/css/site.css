@@ -134,8 +134,8 @@ tr.blocked td, tr.blocked td * {
 
 dt {
     margin-top: 1em;
-    font-weight: bold;
     font-variant: small-caps;
+    color: grey;
     font-size: 16px;
 }
 
@@ -145,6 +145,30 @@ dt::after {
 
 dd {
     margin-left: 10pt;
+}
+
+div.dl {
+    display: table;
+}
+
+div.dl > div.row {
+    display: table-row;
+}
+
+div.dl div.cell {
+    padding: 4px;
+}
+
+div.dd, div.dt {
+    display: table-cell;
+}
+
+div.dt {
+    color: grey;
+}
+
+div.dt::after {
+    content: ":";
 }
 
 ul.nav.analytics {
@@ -205,6 +229,14 @@ div.analytics.links div.link.current {
 
     ul.nav.analytics li > a {
         padding: 5px 10px;
+    }
+
+    div.dd, div.dt {
+        display: inline-block;
+    }
+
+    div.dl {
+        display: block;
     }
 }
 

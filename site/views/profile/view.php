@@ -14,32 +14,45 @@
  */
 
 use \yii\bootstrap\Html;
+use \app\rbac\Permissions;
 
 $this->title = Yii::t('app', 'User #{0} profile', $model->userId);
 $this->params['breadcrumbs'][] = $this->title;
 
-echo Html::tag('h2', $this->title);
-
-echo Html::beginTag('dl');
+echo Html::beginTag('div', ['class' => 'dl']);
 
 $datesAttr = ['createdAt', 'updatedAt'];
 $formatter = Yii::$app->formatter;
 
-echo Html::tag('dt', 'Email');
-echo Html::tag('dd', Html::a($model->user->username,
-    Yii::t('app', 'mailto:{0}<{1}>', [$model->fullName, $model->user->username])));
+echo Html::beginTag('div', ['class' => 'row']);
+echo Html::tag('div', 'Email', ['class' => 'dt cell']);
+echo Html::tag('div', Html::a($model->user->username,
+    Yii::t('app', 'mailto:{0}<{1}>', [$model->fullName, $model->user->username])),
+    ['class' => 'dd cell']);
+echo Html::endTag('div');
 
-echo Html::tag('dt', 'Город');
-echo Html::tag('dd', $model->user->residenceName);
+echo Html::beginTag('div', ['class' => 'row']);
+echo Html::tag('div', 'Город', ['class' => 'dt cell']);
+echo Html::tag('div', $model->user->residenceName, ['class' => 'dd cell']);
+echo Html::endTag('div');
 
 foreach ($model->attributes as $name => $value) {
-    echo Html::tag('dt', $model->getAttributeLabel($name));
+    echo Html::beginTag('div', ['class' => 'row']);
+    echo Html::tag('div', $model->getAttributeLabel($name), ['class' => 'dt cell']);
     if (in_array($name, $datesAttr)) {
         $value = $formatter->asDate($value, 'dd.MM.Y, HH:mm:ss xxx');
     }
     if ($name == 'phone') {
         $value = Html::a($value, Yii::t('app', 'tel:+{0}', $value));
     }
-    echo Html::tag('dd', $value);
+    echo Html::tag('div', $value, ['class' => 'dd cell']);
+    echo Html::endTag('div');
 }
-echo Html::endTag('dl');
+echo Html::endTag('div');
+
+if (Yii::$app->user->can(Permissions::PERMISSION_PROFILE_UPDATE, ['userId' => $model->userId])) {
+    echo Html::tag('div',
+        Html::a('Изменить', ['/profile/update'], ['class' => 'btn btn-default']),
+        ['style' => 'margin-top: 20px']
+    );
+}

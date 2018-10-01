@@ -91,6 +91,7 @@ class ProfileController extends Controller
                         'allow' => true,
                         'actions' => ['update'],
                         'roles' => [Permissions::PERMISSION_PROFILE_UPDATE],
+                        'roleParams' => ['userId' => Yii::$app->user->getId()],
                     ],
                     [
                         'allow' => true,

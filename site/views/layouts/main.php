@@ -86,8 +86,8 @@ AppAsset::register($this);
             Html::endTag('li')
         );
         $items2[] = $logout;
-        if ($user->can(Permissions::PERMISSION_PROFILE_UPDATE)) {
-            $items2[] = ['label' => 'Профиль', 'url' => ['/profile/']];
+        if ($user->can(Permissions::PERMISSION_PROFILE_UPDATE, ['userId' => $user->id])) {
+            $items2[] = ['label' => 'Профиль', 'url' => ['/profile/view', 'id' => $user->id]];
         }
         if ($user->can(Permissions::PERMISSION_ACTIVITY_VIEW)) {
             $items2[] = ['label' => 'Активность', 'url' => ['/activity/']];
