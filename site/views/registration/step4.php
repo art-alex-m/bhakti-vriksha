@@ -17,12 +17,13 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\City;
 
-$this->title = 'Регистрация. Шаг 4 из 6';
+$this->title = 'Регистрация. Шаг 2 из 4';
 $this->params['breadcrumbs'][] = $this->title;
 
 $list = ArrayHelper::map(City::getCitiesList(), 'id', 'title');
 ?>
-<h2>Введите город проживания</h2>
+<h2>Введите ваш город</h2>
+<p>Здесь необходимо указать в каком городе вы проживаете сейчас</p>
 <div class="row">
     <div class="col-lg-3">
 

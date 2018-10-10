@@ -19,6 +19,8 @@ use \app\rbac\Permissions;
 $this->title = Yii::t('app', 'User #{0} profile', $model->userId);
 $this->params['breadcrumbs'][] = $this->title;
 
+echo Html::tag('h2', $this->title);
+
 echo Html::beginTag('div', ['class' => 'dl']);
 
 $datesAttr = ['createdAt', 'updatedAt'];

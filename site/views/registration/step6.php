@@ -15,11 +15,12 @@
 use \yii\bootstrap\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Регистрация. Шаг 6 из 6';
+$this->title = 'Регистрация. Шаг 4 из 4';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<h2>Введите емайл и придумайте пароль</h2>
+<h2>Осталось совсем немного!</h2>
+<p>Здесь необходимо указать Ваш адрес электронной почты и придумать пароль</p>
 
 <div class="row">
     <div class="col-lg-3">

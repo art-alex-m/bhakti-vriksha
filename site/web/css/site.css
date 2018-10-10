@@ -1,6 +1,23 @@
 html,
 body {
     height: 100%;
+    font-size: 11pt;
+}
+
+h1, .h1 {
+    font-size: 180%;
+}
+
+h2, .h2 {
+    font-size: 165%;
+}
+
+h3, .h3 {
+    font-size: 150%;
+}
+
+h4, .h4 {
+    font-size: 120%;
 }
 
 .wrap {

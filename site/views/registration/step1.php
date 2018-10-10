@@ -15,7 +15,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Html;
 
-$this->title = 'Регистрация. Шаг 1 из 6';
+$this->title = 'Введите код';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::submitButton('Далее',
                 ['class' => 'btn btn-success', 'name' => 'registration-step1', 'value' => 1]) ?>
             <?= Html::a('У меня уже есть аккаунт', ['/site/login'],
-                ['style' => ['display' => 'block', 'margin-top' => '1em']]) ?>
+                ['style' => ['margin-left' => '5pt']]) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

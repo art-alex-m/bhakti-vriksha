@@ -16,7 +16,6 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
     ],
-    'defaultRoute' => '/registration/step1',
     'components' => [
         'request' => [
             'cookieValidationKey' => 'PpVlWnGVHgq9_RsMcc-s6ulyjy2cB9zs',

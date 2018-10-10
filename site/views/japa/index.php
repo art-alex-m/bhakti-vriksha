@@ -20,6 +20,8 @@ use yii\bootstrap\Html;
 $this->title = 'Статистика по кругам джапы';
 $this->params['breadcrumbs'][] = $this->title;
 
+echo Html::tag('h2', $this->title);
+
 echo Html::tag('p', 'На этой странице вы можете видеть свои данные по кругам джапы');
 
 echo Html::tag('p', 'Данные о повторении кругов необходимо обновлять 1 раз в месяц');
