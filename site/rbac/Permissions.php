@@ -41,6 +41,7 @@ class Permissions
     const PERMISSION_CITY_CREATE = 'permission_city_create'; /// создание новой записи города
     const PERMISSION_CITY_UPDATE = 'permission_city_update'; /// обновление записи города
     const PERMISSION_CITY_DELETE = 'permission_city_delete'; /// удаоение записи города
+    const PERMISSION_SYSTEM_ABOUT = 'permission_system_about'; /// просмотр информации о системе
 
     /**
      * Возвращает список всех возможных прав доступа
@@ -77,6 +78,7 @@ class Permissions
                 self::PERMISSION_CITY_CREATE => Yii::t('app', 'Permission create new city record'),
                 self::PERMISSION_CITY_UPDATE => Yii::t('app', 'Permission update city record'),
                 self::PERMISSION_CITY_DELETE => Yii::t('app', 'Permission delete city record'),
+                self::PERMISSION_SYSTEM_ABOUT => Yii::t('app', 'Permission system about'),
             ];
         }
         return $list;
