@@ -12,16 +12,27 @@
  * @var \yii\web\View $this
  */
 
-use \yii\bootstrap\Html;
+use yii\bootstrap\Tabs;
 
 \app\assets\C3ChartAsset::register($this);
 
 $this->title = 'Статистика рынка';
 $this->params['breadcrumbs'][] = $this->title;
 
-echo $this->render('chartUsers');
-echo Html::tag('br');
-echo $this->render('chartJapa');
+echo Tabs::widget([
+    'items' => [
+        [
+            'label' => 'Пользователи',
+            'active' => true,
+            'content' => $this->render('chartUsers'),
+        ],
+        [
+            'label' => 'Круги',
+            'content' => $this->render('chartJapa'),
+        ],
+    ]
+]);
+
 
 $c3 = <<<JS
 var c3FormatBuilder = function(format) {
