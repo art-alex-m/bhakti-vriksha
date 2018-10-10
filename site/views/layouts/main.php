@@ -92,7 +92,10 @@ AppAsset::register($this);
         if ($user->can(Permissions::PERMISSION_ACTIVITY_VIEW)) {
             $items2[] = ['label' => 'Активность', 'url' => ['/activity/']];
         }
-        $items2[] = ['label' => 'О системе', 'url' => ['/about/']];
+        $items2[] = ['label' => 'О проекте', 'url' => ['/about/project']];
+        if ($user->can(Permissions::PERMISSION_SYSTEM_ABOUT)) {
+            $items2[] = ['label' => 'О системе', 'url' => ['/about/']];
+        }
         $items2[] = [
             'label' => 'Заблокировать',
             'url' => ['/user/block'],

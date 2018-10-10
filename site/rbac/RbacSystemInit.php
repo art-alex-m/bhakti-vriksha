@@ -91,6 +91,7 @@ class RbacSystemInit extends Model
             Permissions::PERMISSION_CITY_CREATE,
             Permissions::PERMISSION_CITY_UPDATE,
             Permissions::PERMISSION_CITY_DELETE,
+            Permissions::PERMISSION_SYSTEM_ABOUT,
         ];
 
         foreach ($permissions as $name) {

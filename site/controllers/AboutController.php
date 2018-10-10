@@ -11,6 +11,7 @@ namespace app\controllers;
 
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use app\rbac\Permissions as Pm;
 
 /**
  * Class AboutController
@@ -32,6 +33,15 @@ class AboutController extends Controller
     }
 
     /**
+     * Просмотр информации о проекте
+     * @return string
+     */
+    public function actionProject()
+    {
+        return $this->render('project');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -42,8 +52,13 @@ class AboutController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index'],
+                        'actions' => ['project'],
                         'roles' => ['@'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => [Pm::PERMISSION_SYSTEM_ABOUT],
                     ]
                 ]
             ]

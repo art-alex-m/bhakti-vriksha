@@ -21,12 +21,7 @@ echo Html::tag('h2', $this->title);
 <br>
 <p style="font-size: 14pt;">Название системы: <b><?= Yii::$app->name ?></b></p>
 <p style="font-size: 13pt;">Версия системы: <b><?= Yii::$app->version ?></b></p>
-
-<?php if (Yii::$app->user->can(\app\rbac\Permissions::PERMISSION_STATISTICS_AGG)): ?>
-
 <p>Версия PHP: <b><?= PHP_VERSION ?></b></p>
 <p>Версия Yii: <b><?= Yii::getVersion() ?></b></p>
 <p>Драйвер базы данных: <b><?= Yii::$app->db->getDriverName() ?></b></p>
 <p>Версия базы данных: <b><?= Yii::$app->db->getServerVersion() ?></b></p>
-
-<?php endif; ?>
