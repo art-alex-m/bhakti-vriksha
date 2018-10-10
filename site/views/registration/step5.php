@@ -15,13 +15,14 @@
 use \yii\bootstrap\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Регистрация. Шаг 5 из 6';
+$this->title = 'Регистрация. Шаг 3 из 4';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-lg-7">
-        <h3>Напишите, пожалуйста, сколько кругов Харе Кришна маха-мантры
-            Вы повторяете каждый день</h3>
+        <h2>Введите количество кругов</h2>
+        <p>Здесь необходимо указать: сколько кругов Харе Кришна маха-мантры Вы
+            повторяете каждый день</p>
     </div>
 </div>
 <div class="row">

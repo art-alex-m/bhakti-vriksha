@@ -20,7 +20,7 @@ $this->title = 'Измение пароля';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2><?= Html::encode($this->title) ?></h2>
     <div class="row">
         <div class="col-lg-4">
             <?php $form = ActiveForm::begin([

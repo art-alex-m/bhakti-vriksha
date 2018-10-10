@@ -28,9 +28,6 @@ use app\models\LoginForm;
  */
 class SiteController extends Controller
 {
-    /** @var string */
-    public $defaultAction = 'login';
-
     /**
      * {@inheritdoc}
      */
@@ -67,6 +64,20 @@ class SiteController extends Controller
                 'class' => 'yii\web\ErrorAction',
             ],
         ];
+    }
+
+    /**
+     * Страница лендинга
+     * @return string
+     */
+    public function actionIndex()
+    {
+        $user = Yii::$app->user;
+        if (!$user->isGuest) {
+            return $this->redirect(GetReturnUriHelper::getUri($user));
+        }
+
+        return $this->render('index');
     }
 
     /**

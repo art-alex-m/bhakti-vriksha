@@ -19,6 +19,8 @@ use \yii\bootstrap\Html;
 $this->title = 'Изменить профиль пользователя';
 $this->params['breadcrumbs'][] = $this->title;
 
+echo Html::tag('h2', $this->title);
+
 ?>
 <div class="row">
     <div class="col-lg-3">

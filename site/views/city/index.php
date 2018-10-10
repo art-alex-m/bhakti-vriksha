@@ -16,7 +16,7 @@
 use yii\bootstrap\Html;
 use yii\grid\GridView;
 
-$this->title = 'Список городов';
+$this->title = 'Справочник городов';
 $this->params['breadcrumbs'][] = $this->title;
 
 echo Html::tag('h2', $this->title);
