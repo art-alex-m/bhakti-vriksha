@@ -9,7 +9,7 @@
 
 namespace app\controllers;
 
-use app\components\DateTruncExpression;
+use app\components\DateTruncExpression as Dte;
 use app\components\DbTime;
 use app\models\C3JsonData;
 use app\models\JapaAmount;
@@ -32,11 +32,11 @@ class C3ChartController extends Controller
      * @param string $period
      * @return C3JsonData
      */
-    public function actionUsersAmount($period = DateTruncExpression::PERIOD_DAY)
+    public function actionUsersAmount($period = Dte::PERIOD_DAY)
     {
         $date = $this->getStartDate($period);
 
-        $startAmount = UsersAmount::find(DateTruncExpression::PERIOD_MILLENNIUM)
+        $startAmount = UsersAmount::find(Dte::PERIOD_MILLENNIUM)
             ->andWhere(['<', 'createdAt', $date])->one();
 
         UsersAmount::setStartAmount($startAmount);
@@ -64,11 +64,11 @@ class C3ChartController extends Controller
      * @param string $period
      * @return C3JsonData
      */
-    public function actionJapaAmount($period = DateTruncExpression::PERIOD_DAY)
+    public function actionJapaAmount($period = Dte::PERIOD_DAY)
     {
         $date = $this->getStartDate($period);
 
-        $startAmount = JapaAmount::find(DateTruncExpression::PERIOD_MILLENNIUM)
+        $startAmount = JapaAmount::find(Dte::PERIOD_MILLENNIUM)
             ->andWhere(['<', 'createdAt', $date])->one();
 
         JapaAmount::setStartAmount($startAmount);
@@ -94,6 +94,72 @@ class C3ChartController extends Controller
     }
 
     /**
+     * Отправляет демонстрационные данные количества пользователей по периодам
+     * @param string $period
+     * @return C3JsonData
+     */
+    public function actionUsersAmountDemo($period = Dte::PERIOD_DAY)
+    {
+        switch ($period) {
+            case Dte::PERIOD_MONTH:
+                $demo = Yii::getAlias('@app/data/users-amount-demo/year.php');
+                break;
+            case Dte::PERIOD_YEAR:
+                $demo = Yii::getAlias('@app/data/users-amount-demo/5years.php');
+                break;
+            default:
+                $demo = Yii::getAlias('@app/data/users-amount-demo/month.php');
+        }
+
+        $data = new C3JsonData([
+            'json' => require($demo),
+            'keys' => [
+                'x' => 'period',
+                'value' => ['total'],
+            ],
+            'names' => [
+                'total' => Yii::t('app', 'Total participants'),
+            ],
+        ]);
+
+        return $data;
+    }
+
+    /**
+     * Отправляет демонстрационные данные количества кругов по периодам
+     * @param string $period
+     * @return C3JsonData
+     */
+    public function actionJapaAmountDemo($period = Dte::PERIOD_DAY)
+    {
+        switch ($period) {
+            case Dte::PERIOD_MONTH:
+                $demo = Yii::getAlias('@app/data/japa-amount-demo/year.php');
+                break;
+            case Dte::PERIOD_YEAR:
+                $demo = Yii::getAlias('@app/data/japa-amount-demo/5years.php');
+                break;
+            default:
+                $demo = Yii::getAlias('@app/data/japa-amount-demo/month.php');
+        }
+
+        $data = new C3JsonData([
+            'json' => require($demo),
+            'keys' => [
+                'x' => 'period',
+                'value' => ['total'],
+            ],
+            'names' => [
+                'total' => Yii::t('app', 'Total circles'),
+                'previousTotal' => Yii::t('app', 'In previous period'),
+                'amount' => Yii::t('app', 'In current period'),
+            ],
+        ]);
+
+        return $data;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -104,7 +170,12 @@ class C3ChartController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['users-amount', 'japa-amount'],
+                        'actions' => [
+                            'users-amount',
+                            'japa-amount',
+                            'users-amount-demo',
+                            'japa-amount-demo',
+                        ],
                         'roles' => ['@'],
                     ]
                 ]
@@ -121,9 +192,9 @@ class C3ChartController extends Controller
     {
         $date = new DbTime();
         switch ($period) {
-            case DateTruncExpression::PERIOD_MONTH:
+            case Dte::PERIOD_MONTH:
                 return $date->modify('first day of this month 00:00:00')->modify('-11 month');
-            case DateTruncExpression::PERIOD_YEAR:
+            case Dte::PERIOD_YEAR:
                 return $date->modify('first day of january this year 00:00:00')->modify('-4 years');
             default:
                 return $date->modify('-30 days 00:00:00');

@@ -32,6 +32,15 @@ class MarketController extends Controller
     }
 
     /**
+     * Отображение демонстрационной статистики по рынку святого имени
+     * @return string
+     */
+    public function actionDemo()
+    {
+        return $this->render('demo');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -42,7 +51,7 @@ class MarketController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index'],
+                        'actions' => ['index', 'demo'],
                         'roles' => ['@'],
                     ]
                 ]

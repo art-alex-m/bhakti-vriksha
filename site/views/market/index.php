@@ -22,13 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
 echo Tabs::widget([
     'items' => [
         [
-            'label' => 'Пользователи',
+            'label' => 'Участники',
             'active' => true,
-            'content' => $this->render('chartUsers'),
+            'content' => $this->render('chartUsers', ['dataUri' => '/c3-chart/users-amount']),
         ],
         [
             'label' => 'Круги',
-            'content' => $this->render('chartJapa'),
+            'content' => $this->render('chartJapa', ['dataUri' => '/c3-chart/japa-amount']),
         ],
     ]
 ]);
