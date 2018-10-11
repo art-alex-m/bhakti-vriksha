@@ -68,7 +68,7 @@ AppAsset::register($this);
             $items[] = ['label' => 'Круги', 'url' => ['/japa/']];
         }
         $items[] = ['label' => 'Связь', 'url' => ['/contact/']];
-        $items[] = ['label' => 'Статистика', 'url' => ['/market/']];
+        $items[] = ['label' => 'Статистика', 'url' => ['/market/demo']];
         if ($user->can(Permissions::PERMISSION_STATISTICS_AGG)) {
             $items[] = ['label' => 'Аналитика', 'url' => ['/statistics']];
         }

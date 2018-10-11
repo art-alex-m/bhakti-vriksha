@@ -10,6 +10,7 @@
  * @since 1.0.0
  *
  * @var \yii\web\View $this
+ * @var string $dataUri Uri для получения данных с сервера
  */
 
 use \yii\bootstrap\Html;
@@ -17,7 +18,7 @@ use \yii\bootstrap\Html;
 echo Html::tag('h3', 'Число повторений кругов');
 
 $txt = <<<TXT
-На этой странице вы можете видеть график суммарного количества кругов джапы, 
+В этой вкладке вы можете видеть график суммарного количества кругов джапы, 
 прочитанных всеми участниками проекта
 TXT;
 
@@ -90,7 +91,7 @@ jQuery(function($) {
     
     let loadForDays = function () {
         $.get({
-            'url': '/c3-chart/japa-amount?period=day',
+            'url': '$dataUri?period=day',
             'success': function(data) {
                 timeFormatter = c3FormatBuilder('day');
                 data['type'] = 'area-step';
@@ -108,7 +109,7 @@ jQuery(function($) {
     
     let loadForMonth = function () {
         $.get({
-            'url': '/c3-chart/japa-amount?period=month',
+            'url': '$dataUri?period=month',
             'success': function(data) {
                 timeFormatter = c3FormatBuilder('month');
                 data['type'] = 'area-step';
@@ -134,7 +135,7 @@ jQuery(function($) {
     
     let loadForYears = function () {
         $.get({
-            'url': '/c3-chart/japa-amount?period=year',
+            'url': '$dataUri?period=year',
             'success': function(data) {
                 timeFormatter = c3FormatBuilder('year');
                 data['type'] = 'bar';

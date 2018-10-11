@@ -10,13 +10,14 @@
  * @since 1.0.0
  *
  * @var \yii\web\View $this
+ * @var string $dataUri
  */
 
 use \yii\bootstrap\Html;
 
 echo Html::tag('h3', 'Число участников рынка');
 
-echo Html::tag('p', 'На этой странице вы можете видеть график числа участников рынка');
+echo Html::tag('p', 'В этой вкладке вы можете видеть график числа участников рынка');
 
 echo \yii\bootstrap\Tabs::widget([
     'navType' => 'nav-pills',
@@ -87,7 +88,7 @@ jQuery(function($) {
     
     let loadForDays = function () {
         $.get({
-            'url': '/c3-chart/users-amount?period=day',
+            'url': '$dataUri?period=day',
             'success': function(data) {
                 timeFormatter = c3FormatBuilder('day');
                 data['type'] = 'area-step';
@@ -102,7 +103,7 @@ jQuery(function($) {
     
     let loadForMonth = function () {
         $.get({
-            'url': '/c3-chart/users-amount?period=month',
+            'url': '$dataUri?period=month',
             'success': function(data) {
                 timeFormatter = c3FormatBuilder('month');               
                 data['type'] = 'bar';
@@ -117,7 +118,7 @@ jQuery(function($) {
     
     let loadForYears = function () {
         $.get({
-            'url': '/c3-chart/users-amount?period=year',
+            'url': '$dataUri?period=year',
             'success': function(data) {
                 timeFormatter = c3FormatBuilder('year');
                 data['type'] = 'bar';                
