@@ -25,6 +25,7 @@ use app\components\Event;
 use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use yii\web\ServerErrorHttpException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use Yii;
@@ -357,7 +358,7 @@ class RegistrationController extends Controller
      *
      * @param User $user
      * @param Token $token
-     * @throws \RuntimeException
+     * @throws ServerErrorHttpException
      */
     protected function sendRegActivationEmail(User $user, Token $token)
     {
@@ -375,8 +376,10 @@ class RegistrationController extends Controller
             'replyToEmail' => $this->getConfigParam('adminEmail', 'admin@example.com'),
         ]);
         if (!$mail->send()) {
-            throw new \RuntimeException(Yii::t('app',
-                'Cannot send registration activation email for user #{id}. Please contact with administrator',
+            throw new ServerErrorHttpException(Yii::t('app',
+                'Cannot send registration email with activation information for user #{id}. '
+                . 'Please, use correct email address or contact with administrator. '
+                . 'Your registration was aborted',
                 ['id' => $user->id]));
         }
     }

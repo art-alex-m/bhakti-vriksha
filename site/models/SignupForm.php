@@ -36,7 +36,7 @@ class SignupForm extends Model
         return [
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
-            ['username', 'email'],
+            ['username', 'email', 'checkDNS' => true, 'enableIDN' => true],
             ['username', 'string', 'max' => 255],
             [
                 'username',
