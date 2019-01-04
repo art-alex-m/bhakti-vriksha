@@ -128,10 +128,18 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; Бхакти врикша <?= date('Y') ?></p>
+        <p class="pull-right">
+            <?php echo $this->render('/counters/liveinternet'); ?>
+        </p>
     </div>
 </footer>
 
 <?php $this->endBody() ?>
+
+<?php
+echo $this->render('/counters/google-analytics');
+?>
+
 </body>
 </html>
 <?php $this->endPage() ?>
