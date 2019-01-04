@@ -76,8 +76,11 @@ class Mail extends Model
             if ($this->replyToEmail) {
                 $mail->setReplyTo([$this->replyToEmail => $this->replyTo]);
             }
-
-            return $mail->send();
+            try {
+                return $mail->send();
+            } catch (\Exception $e) {
+                $this->addError('recipientEmail', $e->getMessage());
+            }
         }
         return false;
     }

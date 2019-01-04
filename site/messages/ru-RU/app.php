@@ -82,6 +82,11 @@ return [
     'Wrong activation token' => 'Неверный токен активации регистрации',
     'Your account has been successfully activated' =>
         'Ваша учетная запись была успешно активирована',
+    'Cannot send registration email with activation information for user #{id}. '
+    . 'Please, use correct email address or contact with administrator. '
+    . 'Your registration was aborted' => 'Ошибка при отправке письма с информацией по активации для пользователя #{id}. '
+        . 'Пожалуйста, используейте существующий адрес электронной почты, либо свяжитесь с администратором. '
+        . 'Ваша регистрация отменена',
     /// app/models/PwdResetRequestForm.php
     'There is no user with such email' =>
         'Пользователя с таким адресом электронной почты не найдено',
