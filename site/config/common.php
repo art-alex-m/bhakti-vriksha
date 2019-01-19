@@ -10,7 +10,7 @@
  */
 
 return [
-    'version' => '1.1.1',
+    'version' => '1.1.2',
     'language' => 'ru-RU',
     'components' => [
         'authManager' => [
