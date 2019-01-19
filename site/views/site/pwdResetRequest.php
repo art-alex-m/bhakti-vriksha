@@ -10,7 +10,7 @@
  *
  * @var $this yii\web\View
  * @var $form yii\bootstrap\ActiveForm
- * @var $model app\models\LoginForm
+ * @var $model app\models\PwdResetRequestForm
  */
 
 use yii\helpers\Html;
@@ -31,8 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             echo $form
                 ->field($model, 'email')
-                ->textInput(['autofocus' => true])
-                ->label('Логин (email)');
+                ->textInput(['autofocus' => true]);
             ?>
 
             <div class="form-group">

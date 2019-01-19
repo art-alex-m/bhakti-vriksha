@@ -8,7 +8,7 @@ $db = require __DIR__ . '/db.php';
 $common = require __DIR__ . '/common.php';
 
 $config = [
-    'name' => 'Bhakti Vriksha',
+    'name' => 'BV.Monitoring',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],

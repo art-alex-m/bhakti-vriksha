@@ -100,7 +100,7 @@ class PwdResetRequestForm extends Model
     public function attributeLabels()
     {
         return [
-            'email' => Yii::t('app', 'Email'),
+            'email' => Yii::t('app', 'Username'),
         ];
     }
 
