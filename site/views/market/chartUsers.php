@@ -15,9 +15,9 @@
 
 use \yii\bootstrap\Html;
 
-echo Html::tag('h3', 'Число участников рынка');
+echo Html::tag('h3', 'Число участников Рынка');
 
-echo Html::tag('p', 'В этой вкладке вы можете видеть график числа участников рынка');
+echo Html::tag('p', 'В этой вкладке вы можете видеть график числа участников Рынка');
 
 echo \yii\bootstrap\Tabs::widget([
     'navType' => 'nav-pills',

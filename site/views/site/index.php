@@ -19,7 +19,9 @@ $this->title = 'Главная';
     <li><?= $this->title ?></li>
 </ul>
 
-<div class="group" style="margin: 25pt 0 0 10pt;">
+<h2>Центр развития Рынка Святого Имени</h2>
+
+<div class="group" style="margin: 25pt 0 0 0;">
     <?= Html::a('Присоединиться',
         ['/registration'],
         ['class' => 'btn btn-default']) ?>
