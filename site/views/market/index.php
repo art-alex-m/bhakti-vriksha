@@ -2,7 +2,7 @@
 /**
  * index.php
  *
- * Отображение статистики по рынку святого имени
+ * Отображение статистики по Рынку Святого Имени
  *
  * Created by PhpStorm.
  * @date 03.09.18
@@ -16,7 +16,7 @@ use yii\bootstrap\Tabs;
 
 \app\assets\C3ChartAsset::register($this);
 
-$this->title = 'Статистика рынка';
+$this->title = 'Статистика Рынка';
 $this->params['breadcrumbs'][] = $this->title;
 
 echo Tabs::widget([

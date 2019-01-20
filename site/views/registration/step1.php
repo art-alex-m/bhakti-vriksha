@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<h2>Центр развития рынка Святого Имени</h2>
+<h2>Центр развития Рынка Святого Имени</h2>
 
 <div class="row">
     <div class="col-lg-3">

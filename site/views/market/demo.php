@@ -2,7 +2,7 @@
 /**
  * demo.php
  *
- * Отображение демонстрационной статистики по рынку святого имени
+ * Отображение демонстрационной статистики по Рынку Святого Имени
  *
  * Created by PhpStorm.
  * @date 11.10.18
@@ -17,11 +17,11 @@ use yii\helpers\Html;
 
 \app\assets\C3ChartAsset::register($this);
 
-$this->title = 'Статистика рынка (демо)';
-$this->params['breadcrumbs'][] = ['label' => 'Статистика рынка', 'url' => ['/market/']];
+$this->title = 'Статистика Рынка (демо)';
+$this->params['breadcrumbs'][] = ['label' => 'Статистика Рынка', 'url' => ['/market/']];
 $this->params['breadcrumbs'][] = $this->title;
 
-echo Html::tag('h2', 'Демонстрационная статистика развития рынка');
+echo Html::tag('h2', 'Демонстрационная статистика развития Рынка');
 
 echo Html::beginTag('div', ['class' => 'col-md-7', 'style' => 'padding-left:0']);
 echo Html::tag('p', 'На данной странице вы можете видеть состояние графиков, когда система 

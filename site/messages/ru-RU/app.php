@@ -131,9 +131,9 @@ return [
     'The coordinator of the sector' => 'Слуга-лидер сектора',
     'The coordinator of the district' => 'Слуга-лидер округа',
     'The coordinator of the area' => 'Слуга-лидер маха-округа',
-    'The coordinator of the city' => 'Слуга-лидер города',
-    'The coordinator of the region' => 'Слуга-лидер региона',
-    'Coordinator of Russian BV' => 'Слуга-лидер русскоязычной БВ',
+    'The coordinator of the city' => 'Координатор города',
+    'The coordinator of the region' => 'Координатор региона',
+    'Coordinator of Russian BV' => 'Координатор русскоязычной БВ',
     /// app/controllers/UserController.php
     'User #{0} roles were updated' => 'Роли пользователя #{0} были обновлены',
     'User #{0} status was updated' => 'Статус пользователя #{0} был обновлен',
